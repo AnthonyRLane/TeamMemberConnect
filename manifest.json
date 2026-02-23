@@ -1,0 +1,17 @@
+{
+    "name": "Team Member Connect",
+    "short_name": "TMC",
+    "description": "Tulalip Resort Casino — Team Member Call-In Portal",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1e1e2d",
+    "theme_color": "#1e1e2d",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "assets/media/logos/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/x-icon"
+        }
+    ]
+}

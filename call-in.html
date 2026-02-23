@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="./" />
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>Call In — Team Member Connect</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+	<style>
+		/* Hide scrollbar for iframe demo */
+		html, body {
+			scrollbar-width: none !important;
+			-ms-overflow-style: none !important;
+		}
+		html::-webkit-scrollbar, body::-webkit-scrollbar {
+			display: none !important;
+		}
+
+		body:not(.app-blank) {
+			background-image: url('assets/media/patterns/header-bg.jpg') !important;
+			background-size: 100% auto !important;
+			background-position: center top !important;
+			padding-top: 20px !important;
+		}
+		/* Stepper customization for card */
+		.tmc-stepper-nav {
+			display: flex;
+			overflow-x: auto;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+			padding: 1rem 0 0;
+			gap: 0;
+			border-bottom: 1px solid var(--bs-gray-200);
+			scroll-behavior: smooth;
+			max-width: 100%;
+			width: 100%;
+		}
+		.tmc-stepper-nav::-webkit-scrollbar { display: none; }
+		.stepper.stepper-links .stepper-nav { flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 0 !important; }
+		.stepper.stepper-links .stepper-nav .stepper-item {
+			white-space: nowrap;
+			flex-shrink: 0;
+			flex-grow: 0;
+			padding: 0 0.75rem;
+			opacity: 0.5;
+			transition: all 0.3s ease;
+			min-width: max-content;
+		}
+		.stepper.stepper-links .stepper-nav .stepper-item.current {
+			opacity: 1;
+			transform: scale(1.05);
+		}
+		.stepper.stepper-links .stepper-nav .stepper-item .stepper-title {
+			font-size: 0.85rem !important;
+			font-weight: 500 !important;
+			transition: all 0.3s ease;
+		}
+		.stepper.stepper-links .stepper-nav .stepper-item.current .stepper-title {
+			font-weight: 700 !important;
+			color: var(--bs-primary) !important;
+		}
+		/* Form styling */
+		.tmc-form-content { padding: 1.5rem; }
+		.tmc-radio-cards .col-lg-6 { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+		.tmc-radio-cards label { padding: 1rem 1.25rem !important; margin-bottom: 0.75rem !important; }
+		/* Shift buttons */
+		.tmc-shift-row .col-6 label {
+			padding: 0.75rem 0.5rem !important;
+			min-height: 70px !important;
+			display: flex !important;
+			flex-direction: column !important;
+			align-items: center !important;
+			justify-content: center !important;
+		}
+		.tmc-shift-row .col-6 label .fw-bold { font-size: 0.9rem !important; }
+		/* Actions */
+		.tmc-actions {
+			padding: 1rem 1.5rem;
+			border-top: 1px solid var(--bs-gray-200);
+			background: #fff;
+		}
+	</style>
+</head>
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+	<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+
+	<div class="d-flex flex-column flex-root">
+		<div class="page d-flex flex-row flex-column-fluid">
+			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+				<!--begin::Header-->
+				<div id="kt_header" class="header align-items-stretch mb-5 mb-lg-10">
+					<div class="container-xxl d-flex align-items-center">
+						<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
+							<a href="index.html">
+								<img alt="Lane & Company" src="assets/media/logos/laneco-icon-white.png" class="logo-default h-25px" />
+								<img alt="Lane & Company" src="assets/media/logos/laneco-icon-black.png" class="logo-sticky h-25px" />
+							</a>
+						</div>
+						<div class="d-flex align-items-stretch justify-content-end flex-lg-grow-1">
+							<a href="index.html" class="btn btn-sm btn-light-primary">
+								<i class="ki-outline ki-home-2 fs-4 me-1"></i>Dashboard
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--end::Header-->
+
+				<!--begin::Container-->
+				<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+					<div class="content flex-row-fluid" id="kt_content">
+
+						<!--begin::Call-In Card-->
+						<div class="card mt-15">
+							<div class="card-header">
+								<h3 class="card-title">Submit Call-In</h3>
+							</div>
+							<div class="card-body p-0">
+								<!--begin::Stepper-->
+								<div class="stepper stepper-links d-flex flex-column" id="kt_callin_stepper">
+									<!--begin::Nav-->
+									<div class="stepper-nav tmc-stepper-nav mb-0 px-4">
+										<div class="stepper-item current" data-kt-stepper-element="nav">
+											<h3 class="stepper-title">Absence Type</h3>
+										</div>
+										<div class="stepper-item" data-kt-stepper-element="nav">
+											<h3 class="stepper-title">Shift Details</h3>
+										</div>
+										<div class="stepper-item" data-kt-stepper-element="nav">
+											<h3 class="stepper-title">Info</h3>
+										</div>
+										<div class="stepper-item" data-kt-stepper-element="nav">
+											<h3 class="stepper-title">Review</h3>
+										</div>
+										<div class="stepper-item" data-kt-stepper-element="nav">
+											<h3 class="stepper-title">Done</h3>
+										</div>
+									</div>
+									<!--end::Nav-->
+
+									<!--begin::Form-->
+									<form novalidate="novalidate" id="kt_callin_form">
+
+										<!--begin::Step 1-->
+										<div class="current" data-kt-stepper-element="content">
+											<div class="tmc-form-content">
+												<div class="pb-5">
+													<h2 class="fw-bold text-gray-900 fs-3">What type of absence?</h2>
+													<div class="text-muted fw-semibold fs-7">Select the option that best describes your situation.</div>
+												</div>
+												<div class="fv-row tmc-radio-cards">
+													<div class="row">
+														<div class="col-lg-6">
+															<input type="radio" class="btn-check" name="absence_type" value="full_day" id="absence_full_day" />
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_full_day">
+																<i class="ki-duotone ki-calendar-remove fs-2x me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+																<span class="d-block fw-semibold text-start">
+																	<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Full Day</span>
+																	<span class="text-muted fw-semibold fs-8">I won't be coming in today</span>
+																</span>
+															</label>
+														</div>
+														<div class="col-lg-6">
+															<input type="radio" class="btn-check" name="absence_type" value="late_arrival" id="absence_late" />
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_late">
+																<i class="ki-duotone ki-time fs-2x me-4"><span class="path1"></span><span class="path2"></span></i>
+																<span class="d-block fw-semibold text-start">
+																	<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Late Arrival</span>
+																	<span class="text-muted fw-semibold fs-8">I'll be in, just running late</span>
+																</span>
+															</label>
+														</div>
+														<div class="col-lg-6">
+															<input type="radio" class="btn-check" name="absence_type" value="early_departure" id="absence_early" />
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_early">
+																<i class="ki-duotone ki-exit-right fs-2x me-4"><span class="path1"></span><span class="path2"></span></i>
+																<span class="d-block fw-semibold text-start">
+																	<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Early Departure</span>
+																	<span class="text-muted fw-semibold fs-8">I need to leave before my shift ends</span>
+																</span>
+															</label>
+														</div>
+														<div class="col-lg-6">
+															<input type="radio" class="btn-check" name="absence_type" value="multiple_days" id="absence_multi" />
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_multi">
+																<i class="ki-duotone ki-calendar-8 fs-2x me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></i>
+																<span class="d-block fw-semibold text-start">
+																	<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Multiple Days</span>
+																	<span class="text-muted fw-semibold fs-8">I'll be out for more than one day</span>
+																</span>
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--end::Step 1-->
+
+										<!--begin::Step 2-->
+										<div data-kt-stepper-element="content">
+											<div class="tmc-form-content">
+												<div class="pb-5">
+													<h2 class="fw-bold text-gray-900 fs-3">Shift Details</h2>
+													<div class="text-muted fw-semibold fs-7">Tell us about your scheduled shift.</div>
+												</div>
+
+												<div class="fv-row mb-7">
+													<label class="form-label required fs-7">Absence Date</label>
+													<input type="text" class="form-control form-control-lg form-control-solid" id="callin_date" placeholder="Select date" readonly/>
+												</div>
+
+												<div class="fv-row mb-7">
+													<label class="form-label required fs-7">Your Shift</label>
+													<div class="row tmc-shift-row g-2" data-kt-buttons="true">
+														<div class="col-6">
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+																<input type="radio" class="btn-check" name="shift" value="morning" />
+																<span class="fw-bold fs-7 d-block">Morning</span>
+																<span class="d-block text-muted fs-9">6a – 2p</span>
+															</label>
+														</div>
+														<div class="col-6">
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+																<input type="radio" class="btn-check" name="shift" value="swing" />
+																<span class="fw-bold fs-7 d-block">Swing</span>
+																<span class="d-block text-muted fs-9">2p – 10p</span>
+															</label>
+														</div>
+														<div class="col-6">
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+																<input type="radio" class="btn-check" name="shift" value="graveyard" />
+																<span class="fw-bold fs-7 d-block">Grave</span>
+																<span class="d-block text-muted fs-9">10p – 6a</span>
+															</label>
+														</div>
+														<div class="col-6">
+															<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+																<input type="radio" class="btn-check" name="shift" value="other" />
+																<span class="fw-bold fs-7 d-block">Other</span>
+															</label>
+														</div>
+													</div>
+												</div>
+
+												<div class="fv-row mb-7" id="custom_shift_group" style="display:none;">
+													<label class="form-label required fs-7">Shift Start Time</label>
+													<input type="text" class="form-control form-control-lg form-control-solid mb-4" id="custom_shift_start" placeholder="Select start time" readonly/>
+													<label class="form-label required fs-7">Shift End Time</label>
+													<input type="text" class="form-control form-control-lg form-control-solid" id="custom_shift_end" placeholder="Select end time" readonly/>
+												</div>
+
+												<div class="fv-row mb-7" id="estimated_arrival_group" style="display:none;">
+													<label class="form-label required fs-7">Estimated Arrival Time</label>
+													<input type="text" class="form-control form-control-lg form-control-solid" id="callin_arrival_time" placeholder="Select time" readonly/>
+												</div>
+
+												<div class="fv-row mb-7" id="early_departure_group" style="display:none;">
+													<label class="form-label required fs-7">Expected Departure Time</label>
+													<input type="text" class="form-control form-control-lg form-control-solid" id="callin_departure_time" placeholder="Select time" readonly/>
+												</div>
+
+												<div class="fv-row mb-3" id="end_date_group" style="display:none;">
+													<label class="form-label required fs-7">Expected Return Date</label>
+													<input type="text" class="form-control form-control-lg form-control-solid" id="callin_end_date" placeholder="Select return date" readonly/>
+												</div>
+											</div>
+										</div>
+										<!--end::Step 2-->
+
+										<!--begin::Step 3-->
+										<div data-kt-stepper-element="content">
+											<div class="tmc-form-content">
+												<div class="pb-5">
+													<h2 class="fw-bold text-gray-900 fs-3">Additional Information</h2>
+													<div class="text-muted fw-semibold fs-7">Help us understand the reason for your absence.</div>
+												</div>
+
+												<div class="fv-row mb-7" style="display: none;">
+													<label class="form-label required fs-7">Call-In Reason</label>
+													<select class="form-select form-select-lg form-select-solid" name="reason" id="callin_reason">
+														<option value="">Select a reason...</option>
+														<option value="late">Late</option>
+														<option value="absent">Absent</option>
+														<option value="ncns">No Call No Show</option>
+														<option value="early_out">Early Out</option>
+														<option value="meeting">Meeting/Training</option>
+													</select>
+												</div>
+
+												<div class="fv-row mb-3">
+													<label class="form-label fs-7">Additional Notes <span class="text-muted fs-9">(optional)</span></label>
+													<textarea class="form-control form-control-lg form-control-solid" name="notes" rows="3" placeholder="Any details for your supervisor..."></textarea>
+												</div>
+											</div>
+										</div>
+										<!--end::Step 3-->
+
+										<!--begin::Step 4-->
+										<div data-kt-stepper-element="content">
+											<div class="tmc-form-content">
+												<div class="pb-5">
+													<h2 class="fw-bold text-gray-900 fs-3">Review Your Call-In</h2>
+													<div class="text-muted fw-semibold fs-7">Confirm everything looks correct.</div>
+												</div>
+
+												<div class="bg-light rounded p-5 mb-5">
+													<div class="d-flex align-items-center mb-4">
+														<i class="ki-outline ki-calendar-remove text-danger fs-2 me-3"></i>
+														<div>
+															<div class="text-muted fs-9">Absence Type</div>
+															<div class="fw-bold text-gray-800 fs-7" id="review_type">—</div>
+														</div>
+													</div>
+
+													<div class="separator separator-dashed mb-4"></div>
+
+													<div class="d-flex align-items-center mb-4">
+														<i class="ki-outline ki-calendar text-primary fs-2 me-3"></i>
+														<div>
+															<div class="text-muted fs-9">Date & Shift</div>
+															<div class="fw-bold text-gray-800 fs-7" id="review_date_shift">—</div>
+														</div>
+													</div>
+
+													<div class="separator separator-dashed mb-4"></div>
+
+													<div class="d-flex align-items-center mb-4">
+														<i class="ki-outline ki-people text-warning fs-2 me-3"></i>
+														<div>
+															<div class="text-muted fs-9">Department & Supervisor</div>
+															<div class="fw-bold text-gray-800 fs-7" id="review_dept_sup">—</div>
+														</div>
+													</div>
+
+													<div class="separator separator-dashed mb-4"></div>
+
+													<div class="d-flex align-items-center mb-4">
+														<i class="ki-outline ki-message-text text-info fs-2 me-3"></i>
+														<div>
+															<div class="text-muted fs-9">Reason</div>
+															<div class="fw-bold text-gray-800 fs-7" id="review_reason">—</div>
+														</div>
+													</div>
+
+													<div class="separator separator-dashed mb-4" id="review_notes_separator" style="display:none;"></div>
+
+													<div class="d-flex align-items-start" id="review_notes_section" style="display:none;">
+														<i class="ki-outline ki-notepad text-success fs-2 me-3 mt-1"></i>
+														<div>
+															<div class="text-muted fs-9">Additional Notes</div>
+															<div class="fw-bold text-gray-800 fs-7" id="review_notes">—</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="d-flex bg-light-primary rounded border border-primary border-dashed p-4">
+													<i class="ki-outline ki-information-5 text-primary fs-2 me-3 mt-1"></i>
+													<div class="fs-8 text-gray-700">By submitting, your supervisor will be notified immediately via email. You'll receive a confirmation once acknowledged.</div>
+												</div>
+											</div>
+										</div>
+										<!--end::Step 4-->
+
+										<!--begin::Step 5-->
+										<div data-kt-stepper-element="content">
+											<div class="tmc-form-content text-center py-8">
+												<div class="d-flex flex-center mb-6">
+													<div class="d-flex flex-center w-70px h-70px rounded-circle" style="background: linear-gradient(135deg, rgba(80,205,137,0.2), rgba(80,205,137,0.05));">
+														<i class="ki-duotone ki-check-circle fs-3x text-success"><span class="path1"></span><span class="path2"></span></i>
+													</div>
+												</div>
+
+												<h2 class="fw-bold text-gray-900 fs-3 mb-2">Call-In Submitted!</h2>
+												<div class="text-muted fw-semibold fs-7 mb-6">Your supervisor has been notified. You'll get a text when it's acknowledged.</div>
+
+												<div class="bg-light rounded p-4 mb-6 text-start">
+													<div class="d-flex justify-content-between mb-2">
+														<span class="text-muted fs-8">Confirmation #</span>
+														<span class="fw-bold text-gray-800 fs-8">TMC-2026-0247</span>
+													</div>
+													<div class="separator separator-dashed mb-2"></div>
+													<div class="d-flex justify-content-between mb-2">
+														<span class="text-muted fs-8">Submitted</span>
+														<span class="fw-bold text-gray-800 fs-8" id="confirm_timestamp">—</span>
+													</div>
+													<div class="separator separator-dashed mb-2"></div>
+													<div class="d-flex justify-content-between">
+														<span class="text-muted fs-8">Status</span>
+														<span class="badge badge-light-warning fs-9">Pending Acknowledgment</span>
+													</div>
+												</div>
+
+												<a href="index.html" class="btn btn-primary w-100">
+													<i class="ki-outline ki-home-2 me-2"></i>Back to Dashboard
+												</a>
+											</div>
+										</div>
+										<!--end::Step 5-->
+
+									</form>
+									<!--end::Form-->
+								</div>
+								<!--end::Stepper-->
+							</div>
+							<div class="card-footer tmc-actions" id="tmc_actions" style="display:none;">
+								<div class="d-flex justify-content-between">
+									<button type="button" class="btn btn-light-primary" data-kt-stepper-action="previous" id="btn_prev">
+										<i class="ki-outline ki-arrow-left fs-4 me-1"></i>Back
+									</button>
+									<button type="button" class="btn btn-primary" data-kt-stepper-action="submit" id="btn_submit" style="display:none;">
+										Submit Call-In<i class="ki-outline ki-send fs-4 ms-2"></i>
+									</button>
+									<button type="button" class="btn btn-primary" data-kt-stepper-action="next" id="btn_next">
+										Continue<i class="ki-outline ki-arrow-right fs-4 ms-1"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+						<!--end::Call-In Card-->
+
+					</div>
+				</div>
+				<!--end::Container-->
+			</div>
+		</div>
+	</div>
+
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<script>
+	(function() {
+		// User data (in a real app, this would come from the backend)
+		var userData = {
+			firstName: 'Sarah',
+			lastName: 'Johnson',
+			initials: 'SJ',
+			title: 'Dealer',
+			department: 'Table Games',
+			supervisor: 'Jennifer Smith'
+		};
+
+		var element = document.getElementById('kt_callin_stepper');
+		if (!element) return;
+		var stepper = new KTStepper(element);
+
+		// Hide bottom actions on step 1
+		document.getElementById('tmc_actions').style.display = 'none';
+
+		// Center initial step on load
+		setTimeout(scrollActiveStepIntoView, 100);
+
+		// Date picker
+		var dateEl = document.getElementById('callin_date');
+		if (dateEl) {
+			new tempusDominus.TempusDominus(dateEl, {
+				display: { viewMode: 'calendar', components: { hours: false, minutes: false, seconds: false } },
+				localization: { format: 'MM/dd/yyyy' },
+				defaultDate: new Date()
+			});
+			dateEl.value = new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+		}
+
+		// Time pickers
+		['callin_arrival_time', 'callin_departure_time', 'custom_shift_start', 'custom_shift_end'].forEach(function(id) {
+			var el = document.getElementById(id);
+			if (el) {
+				new tempusDominus.TempusDominus(el, {
+					display: { viewMode: 'clock', components: { decades: false, year: false, month: false, date: false, hours: true, minutes: true, seconds: false } },
+					localization: { hourCycle: 'h12', format: 'hh:mm T' },
+					stepping: 15
+				});
+			}
+		});
+
+		var endDateEl = document.getElementById('callin_end_date');
+		if (endDateEl) {
+			new tempusDominus.TempusDominus(endDateEl, {
+				display: { viewMode: 'calendar', components: { hours: false, minutes: false, seconds: false } },
+				localization: { format: 'MM/dd/yyyy' }
+			});
+		}
+
+		// Absence type handler
+		document.querySelectorAll('input[name="absence_type"]').forEach(function(r) {
+			r.addEventListener('change', function() {
+				var val = this.value;
+				setTimeout(function(){
+					stepper.goNext();
+					updateIndicator(stepper.getCurrentStepIndex());
+					document.getElementById('tmc_actions').style.display = '';
+				}, 300);
+				document.getElementById('estimated_arrival_group').style.display = val === 'late_arrival' ? '' : 'none';
+				document.getElementById('early_departure_group').style.display = val === 'early_departure' ? '' : 'none';
+				document.getElementById('end_date_group').style.display = val === 'multiple_days' ? '' : 'none';
+
+				// Auto-set reason based on absence type
+				var reasonSelect = document.getElementById('callin_reason');
+				var reasonMap = {
+					'full_day': 'absent',
+					'late_arrival': 'late',
+					'early_departure': 'early_out',
+					'multiple_days': 'absent'
+				};
+				if (reasonSelect && reasonMap[val]) {
+					reasonSelect.value = reasonMap[val];
+				}
+			});
+		});
+
+		// Custom shift handler
+		document.querySelectorAll('input[name="shift"]').forEach(function(r) {
+			r.addEventListener('change', function() {
+				document.getElementById('custom_shift_group').style.display = this.value === 'other' ? '' : 'none';
+			});
+		});
+
+		// Scroll active step into view and center it
+		function scrollActiveStepIntoView() {
+			var nav = document.querySelector('.tmc-stepper-nav');
+			var activeStep = document.querySelector('.stepper-item.current');
+			if (nav && activeStep) {
+				var navWidth = nav.offsetWidth;
+				var stepLeft = activeStep.offsetLeft;
+				var stepWidth = activeStep.offsetWidth;
+				var scrollTo = stepLeft - (navWidth / 2) + (stepWidth / 2);
+				nav.scrollLeft = scrollTo;
+			}
+		}
+
+		function updateIndicator(idx) {
+			var actions = document.getElementById('tmc_actions');
+			var btnPrev = document.getElementById('btn_prev');
+			var btnNext = document.getElementById('btn_next');
+			var btnSubmit = document.getElementById('btn_submit');
+
+			if (idx >= 5) {
+				actions.style.display = 'none';
+			} else {
+				actions.style.display = idx === 1 ? 'none' : '';
+				btnPrev.style.display = '';
+				btnSubmit.style.display = idx === 4 ? '' : 'none';
+				btnNext.style.display = idx === 4 ? 'none' : '';
+			}
+
+			// Scroll active step into center view after DOM updates
+			setTimeout(scrollActiveStepIntoView, 50);
+		}
+
+		stepper.on('kt.stepper.next', function(s) {
+			s.goNext();
+			var idx = s.getCurrentStepIndex();
+			updateIndicator(idx);
+			if (idx === 4) populateReview();
+			window.scrollTo(0, 0);
+		});
+
+		stepper.on('kt.stepper.previous', function(s) {
+			s.goPrevious();
+			var idx = s.getCurrentStepIndex();
+			updateIndicator(idx);
+			window.scrollTo(0, 0);
+		});
+
+		document.getElementById('btn_next').addEventListener('click', function(e) {
+			e.preventDefault();
+			stepper.goNext();
+			var idx = stepper.getCurrentStepIndex();
+			updateIndicator(idx);
+			if (idx === 4) populateReview();
+			window.scrollTo(0, 0);
+		});
+
+		document.getElementById('btn_prev').addEventListener('click', function(e) {
+			e.preventDefault();
+			stepper.goPrevious();
+			var idx = stepper.getCurrentStepIndex();
+			updateIndicator(idx);
+			window.scrollTo(0, 0);
+		});
+
+		document.getElementById('btn_submit').addEventListener('click', function(e) {
+			e.preventDefault();
+			var now = new Date();
+			var ts = document.getElementById('confirm_timestamp');
+			if (ts) ts.textContent = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+			stepper.goNext();
+			updateIndicator(5);
+		});
+
+		function populateReview() {
+			var type = document.querySelector('input[name="absence_type"]:checked');
+			var typeLabels = { full_day: 'Full Day', late_arrival: 'Late Arrival', early_departure: 'Early Departure', multiple_days: 'Multiple Days' };
+			document.getElementById('review_type').textContent = type ? typeLabels[type.value] : '—';
+
+			var date = document.getElementById('callin_date').value || 'Not selected';
+			var shift = document.querySelector('input[name="shift"]:checked');
+			var shiftLabels = { morning: 'Morning (6a – 2p)', swing: 'Swing (2p – 10p)', graveyard: 'Grave (10p – 6a)' };
+			var shiftText = '—';
+			if (shift) {
+				if (shift.value === 'other') {
+					var startTime = document.getElementById('custom_shift_start').value;
+					var endTime = document.getElementById('custom_shift_end').value;
+					if (startTime && endTime) {
+						shiftText = startTime + ' – ' + endTime;
+					} else {
+						shiftText = 'Custom shift';
+					}
+				} else {
+					shiftText = shiftLabels[shift.value];
+				}
+			}
+			document.getElementById('review_date_shift').textContent = date + ' · ' + shiftText;
+
+			// Department and supervisor from user data
+			document.getElementById('review_dept_sup').textContent = userData.department + ' · ' + userData.supervisor;
+
+			var reason = document.getElementById('callin_reason');
+			document.getElementById('review_reason').textContent = reason ? reason.options[reason.selectedIndex].text : '—';
+
+			// Show notes if entered
+			var notes = document.querySelector('textarea[name="notes"]').value;
+			if (notes && notes.trim()) {
+				document.getElementById('review_notes').textContent = notes;
+				document.getElementById('review_notes_section').style.display = 'flex';
+				document.getElementById('review_notes_separator').style.display = '';
+			} else {
+				document.getElementById('review_notes_section').style.display = 'none';
+				document.getElementById('review_notes_separator').style.display = 'none';
+			}
+		}
+	})();
+	</script>
+</body>
+</html>

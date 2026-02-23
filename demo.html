@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Team Member Connect — Demo</title>
+    <link rel="icon" type="image/png" href="assets/media/logos/laneco-favicon-v2.png?v=3" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .demo-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        /* iPhone 15 Pro frame */
+        .phone-frame {
+            position: relative;
+            width: 393px;
+            height: 852px;
+            border-radius: 55px;
+            background: #1c1c1e;
+            padding: 12px;
+            box-shadow:
+                0 0 0 2px #3a3a3c,
+                0 0 0 4px #1c1c1e,
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Dynamic Island — disabled */
+
+        /* Screen */
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 44px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+        }
+
+        .phone-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            scrollbar-width: none; /* Firefox */
+            pointer-events: auto;
+        }
+        .phone-screen iframe::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        /* Side buttons */
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 180px;
+            width: 4px;
+            height: 80px;
+            background: #3a3a3c;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .btn-volume-up, .btn-volume-down, .btn-silent {
+            position: absolute;
+            left: -3px;
+            width: 4px;
+            background: #3a3a3c;
+            border-radius: 2px 0 0 2px;
+        }
+        .btn-silent { top: 130px; height: 28px; }
+        .btn-volume-up { top: 185px; height: 55px; }
+        .btn-volume-down { top: 252px; height: 55px; }
+
+        /* Info panel beside phone */
+        .demo-info {
+            color: #e0e0e0;
+            max-width: 360px;
+        }
+        .demo-info h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .demo-info .subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+        .demo-info .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .demo-info .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .demo-info .feature-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+        .demo-info .feature-desc {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+        .demo-info .badge-trc {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Page selector */
+        .page-nav {
+            margin-top: 2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .page-nav button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+        .page-nav button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .page-nav button.active {
+            background: #6366f1;
+            border-color: #6366f1;
+        }
+
+        /* Responsive: stack on smaller screens */
+        @media (max-width: 900px) {
+            .demo-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .demo-info {
+                text-align: center;
+                order: -1;
+            }
+            .demo-info .feature {
+                text-align: left;
+            }
+            .page-nav {
+                justify-content: center;
+            }
+        }
+
+        /* Floating Notepad */
+        .demo-notepad {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        .demo-notepad.minimized {
+            width: 60px;
+            height: 60px;
+        }
+
+        .demo-notepad.expanded {
+            width: 320px;
+            height: 400px;
+        }
+
+        .notepad-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .notepad-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.6);
+        }
+
+        .notepad-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .demo-notepad.expanded .notepad-toggle {
+            display: none;
+        }
+
+        .demo-notepad.expanded .notepad-content {
+            display: flex;
+        }
+
+        .notepad-header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: move;
+            user-select: none;
+        }
+
+        .notepad-header h3 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        #notepad-title {
+            outline: none;
+            border-radius: 4px;
+            padding: 2px 4px;
+            transition: background 0.2s;
+        }
+
+        #notepad-title:focus {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .notepad-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .notepad-close:hover {
+            opacity: 1;
+        }
+
+        .notepad-body {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notepad-textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            resize: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            outline: none;
+            color: #1a1a2e;
+        }
+
+        .notepad-footer {
+            padding: 0.75rem 1rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Phone -->
+        <div class="phone-frame">
+            <div class="btn-silent"></div>
+            <div class="btn-volume-up"></div>
+            <div class="btn-volume-down"></div>
+            <div class="phone-screen">
+                <iframe id="phone-iframe" src="login.html"></iframe>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="demo-info">
+            <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" style="max-width: 280px; margin-bottom: 1.5rem;" />
+            <h1>Team Member Connect</h1>
+            <p class="subtitle">Mobile call-in portal for employees</p>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15);">
+                    <i class="ki-outline ki-sms text-danger fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">SMS Authentication</div>
+                    <div class="feature-desc">Team members log in with their phone number — no passwords to remember.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(99, 102, 241, 0.15);">
+                    <i class="ki-outline ki-time text-primary fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Quick Call-In Submission</div>
+                    <div class="feature-desc">Step-by-step wizard captures shift, reason, and estimated return — under 60 seconds.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(34, 197, 94, 0.15);">
+                    <i class="ki-outline ki-chart-line-up text-success fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Full History & Tracking</div>
+                    <div class="feature-desc">Employees see their own call-in history with real-time acknowledgment status.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(234, 179, 8, 0.15);">
+                    <i class="ki-outline ki-notification text-warning fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">HR Announcements</div>
+                    <div class="feature-desc">Push targeted updates to employees — benefits, schedules, policy changes.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(139, 92, 246, 0.15);">
+                    <i class="ki-outline ki-send text-primary fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Automated Department Notifications</div>
+                    <div class="feature-desc">Supervisors receive instant alerts when team members submit call-ins.</div>
+                </div>
+            </div>
+
+            <!-- Page Nav -->
+            <div class="page-nav">
+                <button class="active" onclick="navigate('login.html', this)">Login</button>
+                <button onclick="navigate('index.html', this)">Dashboard</button>
+                <button onclick="navigate('call-in.html', this)">Call-In</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Notepad -->
+    <div class="demo-notepad minimized" id="demo-notepad">
+        <button class="notepad-toggle" id="notepad-toggle">
+            <i class="ki-outline ki-notepad fs-2"></i>
+        </button>
+        <div class="notepad-content">
+            <div class="notepad-header" id="notepad-header">
+                <h3><i class="ki-outline ki-notepad me-2"></i> <span id="notepad-title" contenteditable="true">Demo Notes</span></h3>
+                <button class="notepad-close" id="notepad-close"><i class="ki-outline ki-cross fs-3"></i></button>
+            </div>
+            <div class="notepad-body">
+                <textarea class="notepad-textarea" id="notepad-textarea" placeholder="Type notes here..."></textarea>
+            </div>
+            <div class="notepad-footer">Auto-saved to browser</div>
+        </div>
+    </div>
+
+    <script>
+        function navigate(page, btn) {
+            document.getElementById('phone-iframe').src = page;
+            document.querySelectorAll('.page-nav button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Update active button based on current iframe page
+        function updateActiveButton() {
+            try {
+                var iframe = document.getElementById('phone-iframe');
+                var currentPage = iframe.contentWindow.location.pathname.split('/').pop() || 'login.html';
+
+                // Map pages to button text
+                var pageMap = {
+                    'login.html': 'Login',
+                    'index.html': 'Dashboard',
+                    'call-in.html': 'Call-In'
+                };
+
+                // Update active state
+                document.querySelectorAll('.page-nav button').forEach(function(btn) {
+                    btn.classList.remove('active');
+                    if (btn.textContent.trim() === pageMap[currentPage]) {
+                        btn.classList.add('active');
+                    }
+                });
+            } catch(e) {
+                // Cross-origin or other error, ignore
+            }
+        }
+
+        // Update active button on iframe load
+        document.getElementById('phone-iframe').addEventListener('load', function() {
+            updateActiveButton();
+        });
+
+        // Touch-like drag scrolling
+        (function() {
+            var phoneScreen = document.querySelector('.phone-screen');
+            var iframe = document.getElementById('phone-iframe');
+            var isDragging = false;
+            var startY = 0;
+            var scrollTop = 0;
+            var velocity = 0;
+            var lastY = 0;
+            var lastTime = 0;
+
+            phoneScreen.addEventListener('mousedown', function(e) {
+                try {
+                    var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    var scrollableElement = iframeDoc.documentElement;
+
+                    isDragging = true;
+                    startY = e.clientY;
+                    scrollTop = scrollableElement.scrollTop;
+                    velocity = 0;
+                    lastY = e.clientY;
+                    lastTime = Date.now();
+                    e.preventDefault();
+                } catch(err) {
+                    // Cross-origin or other error
+                }
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+
+                try {
+                    var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    var scrollableElement = iframeDoc.documentElement;
+
+                    var deltaY = startY - e.clientY;
+                    scrollableElement.scrollTop = scrollTop + deltaY;
+
+                    // Calculate velocity for momentum
+                    var now = Date.now();
+                    var timeDelta = now - lastTime;
+                    if (timeDelta > 0) {
+                        velocity = (lastY - e.clientY) / timeDelta;
+                    }
+                    lastY = e.clientY;
+                    lastTime = now;
+                } catch(err) {}
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!isDragging) return;
+
+                isDragging = false;
+
+                // Apply momentum scrolling
+                if (Math.abs(velocity) > 0.1) {
+                    try {
+                        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        var scrollableElement = iframeDoc.documentElement;
+
+                        function momentum() {
+                            if (Math.abs(velocity) > 0.05) {
+                                scrollableElement.scrollTop += velocity * 16;
+                                velocity *= 0.95; // Friction
+                                requestAnimationFrame(momentum);
+                            }
+                        }
+                        momentum();
+                    } catch(err) {}
+                }
+            });
+        })();
+
+        // Floating Notepad
+        (function() {
+            var notepad = document.getElementById('demo-notepad');
+            var toggle = document.getElementById('notepad-toggle');
+            var close = document.getElementById('notepad-close');
+            var textarea = document.getElementById('notepad-textarea');
+            var title = document.getElementById('notepad-title');
+            var header = document.getElementById('notepad-header');
+            var isDragging = false;
+            var dragOffsetX = 0;
+            var dragOffsetY = 0;
+
+            // Load saved notes and title
+            var savedNotes = localStorage.getItem('demo-notes');
+            if (savedNotes) {
+                textarea.value = savedNotes;
+            }
+            var savedTitle = localStorage.getItem('demo-notes-title');
+            if (savedTitle) {
+                title.textContent = savedTitle;
+            }
+
+            // Auto-save notes
+            textarea.addEventListener('input', function() {
+                localStorage.setItem('demo-notes', textarea.value);
+            });
+
+            // Auto-save title
+            title.addEventListener('input', function() {
+                localStorage.setItem('demo-notes-title', title.textContent);
+            });
+
+            // Prevent drag when clicking on editable title
+            title.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+
+            // Toggle expand/minimize
+            toggle.addEventListener('click', function() {
+                notepad.classList.remove('minimized');
+                notepad.classList.add('expanded');
+            });
+
+            close.addEventListener('click', function() {
+                notepad.classList.remove('expanded');
+                notepad.classList.add('minimized');
+                // Reset position to corner
+                notepad.style.left = '';
+                notepad.style.top = '';
+                notepad.style.right = '';
+                notepad.style.bottom = '';
+            });
+
+            // Drag functionality
+            header.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                dragOffsetX = e.clientX - notepad.offsetLeft;
+                dragOffsetY = e.clientY - notepad.offsetTop;
+                notepad.style.transition = 'none';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                var x = e.clientX - dragOffsetX;
+                var y = e.clientY - dragOffsetY;
+                notepad.style.left = x + 'px';
+                notepad.style.top = y + 'px';
+                notepad.style.right = 'auto';
+                notepad.style.bottom = 'auto';
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (isDragging) {
+                    isDragging = false;
+                    notepad.style.transition = 'all 0.3s ease';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

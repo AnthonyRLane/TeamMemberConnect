@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="./" />
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>Sign In — Team Member Connect</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+	<style>
+		/* Hide scrollbar for iframe demo */
+		html, body {
+			scrollbar-width: none !important;
+			-ms-overflow-style: none !important;
+		}
+		html::-webkit-scrollbar, body::-webkit-scrollbar {
+			display: none !important;
+		}
+
+		body {
+			background-color: #0f172a !important;
+			background-image:
+				repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px),
+				linear-gradient(to bottom, #1e293b, #0f172a) !important;
+			padding-top: 20px !important;
+		}
+		.auth-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+		.auth-card { max-width: 400px; width: 100%; }
+
+		/* SMS Toast Notification */
+		.sms-toast {
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(0, 0, 0, 0.9);
+			color: white;
+			padding: 1rem 1.5rem;
+			border-radius: 12px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+			z-index: 9999;
+			display: none;
+			min-width: 320px;
+			max-width: 90%;
+		}
+		.sms-toast.show {
+			display: block;
+			animation: slideDown 0.3s ease-out;
+		}
+		@keyframes slideDown {
+			from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+			to { transform: translateX(-50%) translateY(0); opacity: 1; }
+		}
+		.sms-icon {
+			width: 32px;
+			height: 32px;
+			border-radius: 8px;
+			background: #34C759;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		/* OTP Input styling */
+		.otp-input {
+			width: 50px;
+			height: 50px;
+			font-size: 1.5rem;
+			text-align: center;
+			border: 2px solid var(--bs-gray-300);
+			border-radius: 8px;
+			margin: 0 0.25rem;
+		}
+		.otp-input:focus {
+			border-color: var(--bs-primary);
+			outline: none;
+		}
+
+		/* Button loading fix */
+		.btn-primary {
+			min-height: 48px;
+			height: 48px;
+		}
+		.btn[data-kt-indicator="on"] {
+			position: relative;
+		}
+		.btn[data-kt-indicator="on"] .indicator-label {
+			visibility: hidden;
+		}
+		.btn[data-kt-indicator="on"] .indicator-progress {
+			display: inline-block !important;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+	<!--begin::SMS Toast-->
+	<div class="sms-toast" id="sms_toast">
+		<div class="d-flex align-items-start">
+			<div class="sms-icon me-3">
+				<i class="ki-outline ki-sms text-white fs-3"></i>
+			</div>
+			<div>
+				<div class="fw-bold mb-1">Messages</div>
+				<div class="fs-7 text-white text-opacity-75">Your verification code is: <span class="fw-bold" id="toast_code">123456</span></div>
+			</div>
+		</div>
+	</div>
+	<!--end::SMS Toast-->
+
+	<!--begin::Wrapper-->
+	<div class="auth-wrapper">
+		<div class="auth-card">
+			<!--begin::Card-->
+			<div class="card shadow-lg">
+				<!--begin::Card body-->
+				<div class="card-body p-8">
+					<!--begin::Logo-->
+					<div class="text-center mb-8">
+						<img alt="Logo" src="assets/media/logos/laneco-icon-black.png" class="h-45px mb-4"/>
+						<h1 class="text-gray-900 fw-bold mb-2">Team Member Connect</h1>
+						<p class="text-muted fs-6">Sign in to your account</p>
+					</div>
+					<!--end::Logo-->
+
+					<!--begin::Form-->
+					<form id="login_form" novalidate>
+						<!--begin::Step 1 - Credentials-->
+						<div id="step_credentials" class="step-content">
+							<div class="mb-6">
+								<label class="form-label fs-6 fw-semibold required">Employee Number</label>
+								<input type="text" class="form-control form-control-lg form-control-solid"
+									   id="employee_number" placeholder="Enter your employee number"
+									   autocomplete="off"/>
+								<div class="form-text">Demo: Use <strong>12345</strong></div>
+							</div>
+
+							<div class="mb-8">
+								<label class="form-label fs-6 fw-semibold required">Phone Number</label>
+								<input type="tel" class="form-control form-control-lg form-control-solid"
+									   id="phone_number" placeholder="(555) 555-5555"
+									   autocomplete="off"/>
+								<div class="form-text">Demo: Use <strong>(555) 123-4567</strong></div>
+							</div>
+
+							<button type="button" class="btn btn-primary w-100 mb-4" id="btn_send_code">
+								<span class="indicator-label">Send Verification Code</span>
+								<span class="indicator-progress d-none">
+									Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+								</span>
+							</button>
+
+							<div class="text-center">
+								<span class="text-muted fs-7">Need help? Contact HR at ext. 5500</span>
+							</div>
+						</div>
+						<!--end::Step 1-->
+
+						<!--begin::Step 2 - OTP-->
+						<div id="step_otp" class="step-content" style="display: none;">
+							<div class="text-center mb-6">
+								<i class="ki-duotone ki-shield-tick text-success fs-5x mb-4">
+									<span class="path1"></span>
+									<span class="path2"></span>
+								</i>
+								<h3 class="fw-bold text-gray-900 mb-2">Verify Your Identity</h3>
+								<p class="text-muted fs-6 mb-0">We sent a verification code to</p>
+								<p class="text-primary fw-bold" id="display_phone">•••• ••• ••67</p>
+							</div>
+
+							<div class="mb-6">
+								<label class="form-label fs-6 fw-semibold text-center d-block mb-4">Enter Verification Code</label>
+								<div class="d-flex justify-content-center mb-2">
+									<input type="text" class="otp-input" maxlength="1" id="otp_1" autocomplete="off"/>
+									<input type="text" class="otp-input" maxlength="1" id="otp_2" autocomplete="off"/>
+									<input type="text" class="otp-input" maxlength="1" id="otp_3" autocomplete="off"/>
+									<input type="text" class="otp-input" maxlength="1" id="otp_4" autocomplete="off"/>
+									<input type="text" class="otp-input" maxlength="1" id="otp_5" autocomplete="off"/>
+									<input type="text" class="otp-input" maxlength="1" id="otp_6" autocomplete="off"/>
+								</div>
+								<div class="form-text text-center">Demo code: <strong>123456</strong></div>
+							</div>
+
+							<button type="button" class="btn btn-primary w-100" id="btn_verify_code">
+								<span class="indicator-label">Verify & Sign In</span>
+								<span class="indicator-progress d-none">
+									Verifying... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+								</span>
+							</button>
+						</div>
+						<!--end::Step 2-->
+					</form>
+					<!--end::Form-->
+				</div>
+				<!--end::Card body-->
+			</div>
+			<!--end::Card-->
+		</div>
+	</div>
+	<!--end::Wrapper-->
+
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<script>
+	(function() {
+		// Demo credentials
+		var VALID_EMPLOYEE = '12345';
+		var VALID_PHONE = '5551234567'; // Stored without formatting
+		var VALID_OTP = '123456';
+
+		var btnSendCode = document.getElementById('btn_send_code');
+		var btnVerifyCode = document.getElementById('btn_verify_code');
+		var stepCredentials = document.getElementById('step_credentials');
+		var stepOTP = document.getElementById('step_otp');
+		var smsToast = document.getElementById('sms_toast');
+
+		// Phone number formatting
+		var phoneInput = document.getElementById('phone_number');
+		phoneInput.addEventListener('input', function(e) {
+			var value = e.target.value.replace(/\D/g, '');
+			if (value.length > 0) {
+				if (value.length <= 3) {
+					e.target.value = '(' + value;
+				} else if (value.length <= 6) {
+					e.target.value = '(' + value.slice(0,3) + ') ' + value.slice(3);
+				} else {
+					e.target.value = '(' + value.slice(0,3) + ') ' + value.slice(3,6) + '-' + value.slice(6,10);
+				}
+			}
+		});
+
+		// Send verification code
+		btnSendCode.addEventListener('click', function() {
+			var employeeNum = document.getElementById('employee_number').value.trim();
+			var phoneNum = phoneInput.value.replace(/\D/g, '');
+
+			if (!employeeNum || !phoneNum) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Missing Information',
+					text: 'Please enter both your employee number and phone number.',
+					confirmButtonText: 'OK'
+				});
+				return;
+			}
+
+			// Show loading
+			btnSendCode.setAttribute('data-kt-indicator', 'on');
+			btnSendCode.disabled = true;
+
+			// Simulate API call
+			setTimeout(function() {
+				if (employeeNum === VALID_EMPLOYEE && phoneNum === VALID_PHONE) {
+					// Success - show SMS toast
+					document.getElementById('display_phone').textContent = phoneInput.value;
+					showSMSToast();
+
+					setTimeout(function() {
+						stepCredentials.style.display = 'none';
+						stepOTP.style.display = 'block';
+						document.getElementById('otp_1').focus();
+
+						// Auto-fill OTP after a short delay for demo
+						setTimeout(function() {
+							autoFillOTP();
+						}, 1500);
+					}, 2000);
+				} else {
+					// Invalid credentials
+					btnSendCode.removeAttribute('data-kt-indicator');
+					btnSendCode.disabled = false;
+
+					Swal.fire({
+						icon: 'error',
+						title: 'Invalid Credentials',
+						text: 'Employee number and phone number do not match our records.',
+						confirmButtonText: 'Try Again'
+					});
+				}
+			}, 1500);
+		});
+
+		// Show SMS toast notification
+		function showSMSToast() {
+			smsToast.classList.add('show');
+			setTimeout(function() {
+				smsToast.classList.remove('show');
+			}, 5000);
+		}
+
+		// Auto-fill OTP for demo
+		function autoFillOTP() {
+			var otpCode = VALID_OTP.split('');
+			otpCode.forEach(function(digit, index) {
+				setTimeout(function() {
+					otpInputs[index].value = digit;
+					if (index < otpInputs.length - 1) {
+						otpInputs[index + 1].focus();
+					}
+				}, index * 150); // Stagger each digit by 150ms
+			});
+		}
+
+		// OTP input auto-advance
+		var otpInputs = document.querySelectorAll('.otp-input');
+		otpInputs.forEach(function(input, index) {
+			input.addEventListener('input', function(e) {
+				if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+					otpInputs[index + 1].focus();
+				}
+			});
+			input.addEventListener('keydown', function(e) {
+				if (e.key === 'Backspace' && !e.target.value && index > 0) {
+					otpInputs[index - 1].focus();
+				}
+			});
+		});
+
+		// Verify OTP
+		btnVerifyCode.addEventListener('click', function() {
+			var otp = '';
+			otpInputs.forEach(function(input) {
+				otp += input.value;
+			});
+
+			if (otp.length !== 6) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Invalid Code',
+					text: 'Please enter the complete 6-digit verification code.',
+					confirmButtonText: 'OK'
+				});
+				return;
+			}
+
+			// Show loading
+			btnVerifyCode.setAttribute('data-kt-indicator', 'on');
+			btnVerifyCode.disabled = true;
+
+			// Simulate API call
+			setTimeout(function() {
+				if (otp === VALID_OTP) {
+					// Success - redirect to dashboard
+					Swal.fire({
+						icon: 'success',
+						title: 'Welcome!',
+						text: 'Sign in successful. Redirecting...',
+						timer: 1500,
+						showConfirmButton: false
+					}).then(function() {
+						window.location.href = 'index.html';
+					});
+				} else {
+					// Invalid OTP
+					btnVerifyCode.removeAttribute('data-kt-indicator');
+					btnVerifyCode.disabled = false;
+
+					// Clear OTP inputs
+					otpInputs.forEach(function(input) {
+						input.value = '';
+					});
+					otpInputs[0].focus();
+
+					Swal.fire({
+						icon: 'error',
+						title: 'Invalid Code',
+						text: 'The verification code you entered is incorrect. Please try again.',
+						confirmButtonText: 'Try Again'
+					});
+				}
+			}, 1500);
+		});
+
+		// Allow Enter key to submit
+		document.getElementById('employee_number').addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') btnSendCode.click();
+		});
+		phoneInput.addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') btnSendCode.click();
+		});
+	})();
+	</script>
+</body>
+</html>

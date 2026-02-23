@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	<title>Call In — Team Member Connect</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+	<style>
+		html, body { margin: 0 !important; padding: 0 !important; background: #1e1e2d !important; }
+		.tmc-topbar {
+			background: #1e1e2d;
+			padding: 1rem 1.25rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+		}
+		.tmc-topbar .cancel-btn {
+			color: #3b82f6;
+			text-decoration: none;
+			font-weight: 400;
+			font-size: 1rem;
+			padding: 0.5rem 0;
+		}
+		.tmc-topbar .page-title {
+			color: #fff;
+			font-weight: 600;
+			font-size: 1.05rem;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		.tmc-topbar .step-indicator { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 500; }
+
+		/* Main content area */
+		#kt_callin_stepper { background: #fff; min-height: 100vh; }
+
+		/* Stepper nav — horizontal scroll on mobile */
+		.tmc-stepper-nav {
+			display: flex;
+			overflow-x: auto;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+			padding: 1rem 1rem 0;
+			gap: 0;
+			border-bottom: 1px solid var(--bs-gray-200);
+			background: #fff;
+		}
+		.tmc-stepper-nav::-webkit-scrollbar { display: none; }
+
+		/* Override stepper-links for horizontal mobile */
+		.stepper.stepper-links .stepper-nav { flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 0 !important; }
+		.stepper.stepper-links .stepper-nav .stepper-item { white-space: nowrap; flex-shrink: 0; padding: 0 0.75rem; }
+		.stepper.stepper-links .stepper-nav .stepper-item .stepper-title { font-size: 0.85rem !important; }
+
+		/* Form content full width */
+		.tmc-form-content { padding: 1.25rem; max-width: 100%; }
+		.tmc-form-content .form-control-lg { font-size: 1rem; }
+
+		/* Radio cards — single column on mobile */
+		.tmc-radio-cards .col-lg-6 { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+		.tmc-radio-cards label { padding: 1rem 1.25rem !important; margin-bottom: 0.75rem !important; }
+
+		/* Shift buttons — equal width and height */
+		.tmc-shift-row .col-6 label {
+			padding: 0.75rem 0.5rem !important;
+			min-height: 70px !important;
+			display: flex !important;
+			flex-direction: column !important;
+			align-items: center !important;
+			justify-content: center !important;
+		}
+		.tmc-shift-row .col-6 label .fw-bold { font-size: 0.9rem !important; }
+
+		/* Actions sticky at bottom */
+		.tmc-actions {
+			position: sticky;
+			bottom: 0;
+			background: #fff;
+			border-top: 1px solid var(--bs-gray-200);
+			padding: 1rem 1.25rem;
+			padding-bottom: max(1rem, env(safe-area-inset-bottom));
+		}
+	</style>
+</head>
+<body>
+	<!--begin::Top Bar-->
+	<div class="tmc-topbar">
+		<a href="index.html" class="cancel-btn">Cancel</a>
+		<span class="page-title">Call-In</span>
+		<span class="step-indicator" id="step_indicator">1 of 4</span>
+	</div>
+	<!--end::Top Bar-->
+
+	<!--begin::Stepper-->
+	<div class="stepper stepper-links d-flex flex-column" id="kt_callin_stepper">
+		<!--begin::Nav-->
+		<div class="stepper-nav tmc-stepper-nav mb-0">
+			<div class="stepper-item current" data-kt-stepper-element="nav">
+				<h3 class="stepper-title">Absence Type</h3>
+			</div>
+			<div class="stepper-item" data-kt-stepper-element="nav">
+				<h3 class="stepper-title">Shift Details</h3>
+			</div>
+			<div class="stepper-item" data-kt-stepper-element="nav">
+				<h3 class="stepper-title">Info</h3>
+			</div>
+			<div class="stepper-item" data-kt-stepper-element="nav">
+				<h3 class="stepper-title">Review</h3>
+			</div>
+			<div class="stepper-item" data-kt-stepper-element="nav">
+				<h3 class="stepper-title">Done</h3>
+			</div>
+		</div>
+		<!--end::Nav-->
+
+		<!--begin::Form-->
+		<form novalidate="novalidate" id="kt_callin_form">
+
+			<!--begin::Step 1 — Absence Type-->
+			<div class="current" data-kt-stepper-element="content">
+				<div class="tmc-form-content">
+					<div class="pb-5">
+						<h2 class="fw-bold text-gray-900 fs-3">What type of absence?</h2>
+						<div class="text-muted fw-semibold fs-7">Select the option that best describes your situation.</div>
+					</div>
+
+					<div class="fv-row tmc-radio-cards">
+						<div class="row">
+							<div class="col-lg-6">
+								<input type="radio" class="btn-check" name="absence_type" value="full_day" id="absence_full_day" />
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_full_day">
+									<i class="ki-duotone ki-calendar-remove fs-2x me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+									<span class="d-block fw-semibold text-start">
+										<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Full Day</span>
+										<span class="text-muted fw-semibold fs-8">I won't be coming in today</span>
+									</span>
+								</label>
+							</div>
+							<div class="col-lg-6">
+								<input type="radio" class="btn-check" name="absence_type" value="late_arrival" id="absence_late" />
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_late">
+									<i class="ki-duotone ki-time fs-2x me-4"><span class="path1"></span><span class="path2"></span></i>
+									<span class="d-block fw-semibold text-start">
+										<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Late Arrival</span>
+										<span class="text-muted fw-semibold fs-8">I'll be in, just running late</span>
+									</span>
+								</label>
+							</div>
+							<div class="col-lg-6">
+								<input type="radio" class="btn-check" name="absence_type" value="early_departure" id="absence_early" />
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_early">
+									<i class="ki-duotone ki-exit-right fs-2x me-4"><span class="path1"></span><span class="path2"></span></i>
+									<span class="d-block fw-semibold text-start">
+										<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Early Departure</span>
+										<span class="text-muted fw-semibold fs-8">I need to leave before my shift ends</span>
+									</span>
+								</label>
+							</div>
+							<div class="col-lg-6">
+								<input type="radio" class="btn-check" name="absence_type" value="multiple_days" id="absence_multi" />
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-5 d-flex align-items-center mb-3 w-100" for="absence_multi">
+									<i class="ki-duotone ki-calendar-8 fs-2x me-4"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></i>
+									<span class="d-block fw-semibold text-start">
+										<span class="text-gray-900 fw-bold d-block fs-5 mb-1">Multiple Days</span>
+										<span class="text-muted fw-semibold fs-8">I'll be out for more than one day</span>
+									</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end::Step 1-->
+
+			<!--begin::Step 2 — Shift Details-->
+			<div data-kt-stepper-element="content">
+				<div class="tmc-form-content">
+					<div class="pb-5">
+						<h2 class="fw-bold text-gray-900 fs-3">Shift Details</h2>
+						<div class="text-muted fw-semibold fs-7">Tell us about your scheduled shift.</div>
+					</div>
+
+					<div class="fv-row mb-7">
+						<label class="form-label required fs-7">Absence Date</label>
+						<input type="text" class="form-control form-control-lg form-control-solid" id="callin_date" placeholder="Select date" readonly/>
+					</div>
+
+					<div class="fv-row mb-7">
+						<label class="form-label required fs-7">Your Shift</label>
+						<div class="row tmc-shift-row g-2" data-kt-buttons="true">
+							<div class="col-6">
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+									<input type="radio" class="btn-check" name="shift" value="morning" />
+									<span class="fw-bold fs-7 d-block">Morning</span>
+									<span class="d-block text-muted fs-9">6a – 2p</span>
+								</label>
+							</div>
+							<div class="col-6">
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+									<input type="radio" class="btn-check" name="shift" value="swing" />
+									<span class="fw-bold fs-7 d-block">Swing</span>
+									<span class="d-block text-muted fs-9">2p – 10p</span>
+								</label>
+							</div>
+							<div class="col-6">
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+									<input type="radio" class="btn-check" name="shift" value="graveyard" />
+									<span class="fw-bold fs-7 d-block">Grave</span>
+									<span class="d-block text-muted fs-9">10p – 6a</span>
+								</label>
+							</div>
+							<div class="col-6">
+								<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-3 text-center">
+									<input type="radio" class="btn-check" name="shift" value="other" />
+									<span class="fw-bold fs-7 d-block">Other</span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="fv-row mb-7" id="custom_shift_group" style="display:none;">
+						<label class="form-label required fs-7">Shift Start Time</label>
+						<input type="text" class="form-control form-control-lg form-control-solid mb-4" id="custom_shift_start" placeholder="Select start time" readonly/>
+						<label class="form-label required fs-7">Shift End Time</label>
+						<input type="text" class="form-control form-control-lg form-control-solid" id="custom_shift_end" placeholder="Select end time" readonly/>
+					</div>
+
+					<div class="fv-row mb-7" id="estimated_arrival_group" style="display:none;">
+						<label class="form-label required fs-7">Estimated Arrival Time</label>
+						<input type="text" class="form-control form-control-lg form-control-solid" id="callin_arrival_time" placeholder="Select time" readonly/>
+					</div>
+
+					<div class="fv-row mb-7" id="early_departure_group" style="display:none;">
+						<label class="form-label required fs-7">Expected Departure Time</label>
+						<input type="text" class="form-control form-control-lg form-control-solid" id="callin_departure_time" placeholder="Select time" readonly/>
+					</div>
+
+					<div class="fv-row mb-3" id="end_date_group" style="display:none;">
+						<label class="form-label required fs-7">Expected Return Date</label>
+						<input type="text" class="form-control form-control-lg form-control-solid" id="callin_end_date" placeholder="Select return date" readonly/>
+					</div>
+				</div>
+			</div>
+			<!--end::Step 2-->
+
+			<!--begin::Step 3 — Additional Info-->
+			<div data-kt-stepper-element="content">
+				<div class="tmc-form-content">
+					<div class="pb-5">
+						<h2 class="fw-bold text-gray-900 fs-3">Additional Information</h2>
+						<div class="text-muted fw-semibold fs-7">Help us understand the reason for your absence.</div>
+					</div>
+
+					<div class="fv-row mb-7">
+						<label class="form-label required fs-7">Reason for Absence</label>
+						<select class="form-select form-select-lg form-select-solid" name="reason" id="callin_reason">
+							<option value="">Select a reason...</option>
+							<option value="illness">Illness / Not Feeling Well</option>
+							<option value="family_emergency">Family Emergency</option>
+							<option value="childcare">Childcare Issue</option>
+							<option value="car_trouble">Vehicle / Transportation Issue</option>
+							<option value="medical_appt">Medical Appointment</option>
+							<option value="personal">Personal Matter</option>
+							<option value="bereavement">Bereavement</option>
+							<option value="weather">Weather / Road Conditions</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+
+					<div class="fv-row mb-3">
+						<label class="form-label fs-7">Additional Notes <span class="text-muted fs-9">(optional)</span></label>
+						<textarea class="form-control form-control-lg form-control-solid" name="notes" rows="3" placeholder="Any details for your supervisor..."></textarea>
+					</div>
+				</div>
+			</div>
+			<!--end::Step 3-->
+
+			<!--begin::Step 4 — Review-->
+			<div data-kt-stepper-element="content">
+				<div class="tmc-form-content">
+					<div class="pb-5">
+						<h2 class="fw-bold text-gray-900 fs-3">Review Your Call-In</h2>
+						<div class="text-muted fw-semibold fs-7">Confirm everything looks correct.</div>
+					</div>
+
+					<div class="bg-light rounded p-5 mb-5">
+						<div class="d-flex align-items-center mb-4">
+							<i class="ki-outline ki-calendar-remove text-danger fs-2 me-3"></i>
+							<div>
+								<div class="text-muted fs-9">Absence Type</div>
+								<div class="fw-bold text-gray-800 fs-7" id="review_type">Full Day</div>
+							</div>
+						</div>
+
+						<div class="separator separator-dashed mb-4"></div>
+
+						<div class="d-flex align-items-center mb-4">
+							<i class="ki-outline ki-calendar text-primary fs-2 me-3"></i>
+							<div>
+								<div class="text-muted fs-9">Date & Shift</div>
+								<div class="fw-bold text-gray-800 fs-7" id="review_date_shift">—</div>
+							</div>
+						</div>
+
+						<div class="separator separator-dashed mb-4"></div>
+
+						<div class="d-flex align-items-center">
+							<i class="ki-outline ki-message-text text-info fs-2 me-3"></i>
+							<div>
+								<div class="text-muted fs-9">Reason</div>
+								<div class="fw-bold text-gray-800 fs-7" id="review_reason">—</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="d-flex bg-light-primary rounded border border-primary border-dashed p-4">
+						<i class="ki-outline ki-information-5 text-primary fs-2 me-3 mt-1"></i>
+						<div class="fs-8 text-gray-700">By submitting, your supervisor will be notified immediately via email. You'll receive a confirmation once acknowledged.</div>
+					</div>
+				</div>
+			</div>
+			<!--end::Step 4-->
+
+			<!--begin::Step 5 — Confirmed-->
+			<div data-kt-stepper-element="content">
+				<div class="tmc-form-content text-center py-8">
+					<div class="d-flex flex-center mb-6">
+						<div class="d-flex flex-center w-70px h-70px rounded-circle" style="background: linear-gradient(135deg, rgba(80,205,137,0.2), rgba(80,205,137,0.05));">
+							<i class="ki-duotone ki-check-circle fs-3x text-success"><span class="path1"></span><span class="path2"></span></i>
+						</div>
+					</div>
+
+					<h2 class="fw-bold text-gray-900 fs-3 mb-2">Call-In Submitted!</h2>
+					<div class="text-muted fw-semibold fs-7 mb-6">Your supervisor has been notified. You'll get a text when it's acknowledged.</div>
+
+					<div class="bg-light rounded p-4 mb-6 text-start">
+						<div class="d-flex justify-content-between mb-2">
+							<span class="text-muted fs-8">Confirmation #</span>
+							<span class="fw-bold text-gray-800 fs-8">TMC-2026-0247</span>
+						</div>
+						<div class="separator separator-dashed mb-2"></div>
+						<div class="d-flex justify-content-between mb-2">
+							<span class="text-muted fs-8">Submitted</span>
+							<span class="fw-bold text-gray-800 fs-8" id="confirm_timestamp">—</span>
+						</div>
+						<div class="separator separator-dashed mb-2"></div>
+						<div class="d-flex justify-content-between">
+							<span class="text-muted fs-8">Status</span>
+							<span class="badge badge-light-warning fs-9">Pending Acknowledgment</span>
+						</div>
+					</div>
+
+					<a href="index.html" class="btn btn-primary w-100">
+						<i class="ki-outline ki-home-2 me-2"></i>Back to Dashboard
+					</a>
+				</div>
+			</div>
+			<!--end::Step 5-->
+
+		</form>
+		<!--end::Form-->
+	</div>
+	<!--end::Stepper-->
+
+	<!--begin::Sticky Actions-->
+	<div class="tmc-actions" id="tmc_actions">
+		<div class="d-flex justify-content-between">
+			<button type="button" class="btn btn-light-primary" data-kt-stepper-action="previous" id="btn_prev">
+				<i class="ki-outline ki-arrow-left fs-4 me-1"></i>Back
+			</button>
+			<button type="button" class="btn btn-primary" data-kt-stepper-action="submit" id="btn_submit" style="display:none;">
+				Submit Call-In<i class="ki-outline ki-send fs-4 ms-2"></i>
+			</button>
+			<button type="button" class="btn btn-primary" data-kt-stepper-action="next" id="btn_next">
+				Continue<i class="ki-outline ki-arrow-right fs-4 ms-1"></i>
+			</button>
+		</div>
+	</div>
+	<!--end::Sticky Actions-->
+
+	<script src="assets/plugins/global/plugins.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<script>
+	(function() {
+		var element = document.getElementById('kt_callin_stepper');
+		if (!element) return;
+		var stepper = new KTStepper(element);
+
+		// Hide bottom actions on step 1
+		document.getElementById('tmc_actions').style.display = 'none';
+
+		// Tempus Dominus pickers
+		var dateEl = document.getElementById('callin_date');
+		var datePicker;
+		if (dateEl) {
+			datePicker = new tempusDominus.TempusDominus(dateEl, {
+				display: { viewMode: 'calendar', components: { hours: false, minutes: false, seconds: false } },
+				localization: { format: 'MM/dd/yyyy' },
+				defaultDate: new Date()
+			});
+			// Set default date to today
+			dateEl.value = new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+		}
+
+		// Time-only pickers (arrival, departure, custom shift)
+		['callin_arrival_time', 'callin_departure_time', 'custom_shift_start', 'custom_shift_end'].forEach(function(id) {
+			var el = document.getElementById(id);
+			if (el) {
+				new tempusDominus.TempusDominus(el, {
+					display: {
+						viewMode: 'clock',
+						components: {
+							decades: false,
+							year: false,
+							month: false,
+							date: false,
+							hours: true,
+							minutes: true,
+							seconds: false
+						}
+					},
+					localization: {
+						hourCycle: 'h12',
+						format: 'hh:mm T'
+					},
+					stepping: 15
+				});
+			}
+		});
+
+		var endDateEl = document.getElementById('callin_end_date');
+		if (endDateEl) {
+			new tempusDominus.TempusDominus(endDateEl, {
+				display: { viewMode: 'calendar', components: { hours: false, minutes: false, seconds: false } },
+				localization: { format: 'MM/dd/yyyy' }
+			});
+		}
+
+		// Conditional fields
+		document.querySelectorAll('input[name="absence_type"]').forEach(function(r) {
+			r.addEventListener('change', function() {
+				var val = this.value;
+				setTimeout(function(){
+					stepper.goNext();
+					updateIndicator(stepper.getCurrentStepIndex());
+					// Show bottom actions when moving to step 2
+					document.getElementById('tmc_actions').style.display = '';
+				}, 300);
+				document.getElementById('estimated_arrival_group').style.display = val === 'late_arrival' ? '' : 'none';
+				document.getElementById('early_departure_group').style.display = val === 'early_departure' ? '' : 'none';
+				document.getElementById('end_date_group').style.display = val === 'multiple_days' ? '' : 'none';
+			});
+		});
+
+		// Handle custom shift field
+		document.querySelectorAll('input[name="shift"]').forEach(function(r) {
+			r.addEventListener('change', function() {
+				document.getElementById('custom_shift_group').style.display = this.value === 'other' ? '' : 'none';
+			});
+		});
+
+		// Step indicator and button visibility
+		function updateIndicator(idx) {
+			var el = document.getElementById('step_indicator');
+			var actions = document.getElementById('tmc_actions');
+			var btnPrev = document.getElementById('btn_prev');
+			var btnNext = document.getElementById('btn_next');
+			var btnSubmit = document.getElementById('btn_submit');
+
+			if (idx >= 5) {
+				el.textContent = 'Done';
+				actions.style.display = 'none';
+			} else {
+				el.textContent = idx + ' of 4';
+				// Hide actions on step 1
+				actions.style.display = idx === 1 ? 'none' : '';
+				// Back button always visible when actions are visible
+				btnPrev.style.display = '';
+				// Show submit button on review step (4), hide next
+				btnSubmit.style.display = idx === 4 ? '' : 'none';
+				btnNext.style.display = idx === 4 ? 'none' : '';
+			}
+		}
+
+		stepper.on('kt.stepper.next', function(s) {
+			s.goNext();
+			var idx = s.getCurrentStepIndex();
+			updateIndicator(idx);
+			if (idx === 4) populateReview();
+			window.scrollTo(0, 0);
+		});
+
+		stepper.on('kt.stepper.previous', function(s) {
+			s.goPrevious();
+			var idx = s.getCurrentStepIndex();
+			updateIndicator(idx);
+			window.scrollTo(0, 0);
+		});
+
+		// Manual button handlers to ensure they work
+		document.getElementById('btn_next').addEventListener('click', function(e) {
+			e.preventDefault();
+			stepper.goNext();
+			var idx = stepper.getCurrentStepIndex();
+			updateIndicator(idx);
+			if (idx === 4) populateReview();
+			window.scrollTo(0, 0);
+		});
+
+		document.getElementById('btn_prev').addEventListener('click', function(e) {
+			e.preventDefault();
+			stepper.goPrevious();
+			var idx = stepper.getCurrentStepIndex();
+			updateIndicator(idx);
+			window.scrollTo(0, 0);
+		});
+
+		document.getElementById('btn_submit').addEventListener('click', function(e) {
+			e.preventDefault();
+			var now = new Date();
+			var ts = document.getElementById('confirm_timestamp');
+			if (ts) ts.textContent = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+			stepper.goNext();
+			updateIndicator(5);
+		});
+
+		function populateReview() {
+			var type = document.querySelector('input[name="absence_type"]:checked');
+			var typeLabels = { full_day: 'Full Day', late_arrival: 'Late Arrival', early_departure: 'Early Departure', multiple_days: 'Multiple Days' };
+			document.getElementById('review_type').textContent = type ? typeLabels[type.value] : '—';
+
+			var date = document.getElementById('callin_date').value || 'Not selected';
+			var shift = document.querySelector('input[name="shift"]:checked');
+			var shiftLabels = { morning: 'Morning (6a – 2p)', swing: 'Swing (2p – 10p)', graveyard: 'Grave (10p – 6a)' };
+			var shiftText = '—';
+			if (shift) {
+				if (shift.value === 'other') {
+					var startTime = document.getElementById('custom_shift_start').value;
+					var endTime = document.getElementById('custom_shift_end').value;
+					if (startTime && endTime) {
+						shiftText = startTime + ' – ' + endTime;
+					} else {
+						shiftText = 'Custom shift';
+					}
+				} else {
+					shiftText = shiftLabels[shift.value];
+				}
+			}
+			document.getElementById('review_date_shift').textContent = date + ' · ' + shiftText;
+
+			var reason = document.getElementById('callin_reason');
+			document.getElementById('review_reason').textContent = reason ? reason.options[reason.selectedIndex].text : '—';
+		}
+	})();
+	</script>
+</body>
+</html>

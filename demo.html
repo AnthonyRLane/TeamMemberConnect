@@ -395,6 +395,9 @@
                 <button class="active" onclick="navigate('login.html', this)">Login</button>
                 <button onclick="navigate('index.html', this)">Dashboard</button>
                 <button onclick="navigate('call-in.html', this)">Call-In</button>
+            </div>
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.2); margin: 12px 0; width: 100%;">
+            <div class="page-nav">
                 <button onclick="openReceptionModal()" style="background: #dc3545; color: white;">Reception App</button>
             </div>
         </div>
@@ -606,12 +609,21 @@
             });
         })();
 
-        // Reception App Modal
+        // Reception App Modal with animation
         function openReceptionModal() {
-            document.getElementById('receptionModal').style.display = 'flex';
+            var modal = document.getElementById('receptionModal');
+            var content = modal.querySelector('.modal-content');
+            modal.style.display = 'flex';
+            setTimeout(function() {
+                modal.classList.add('open');
+            }, 10);
         }
         function closeReceptionModal() {
-            document.getElementById('receptionModal').style.display = 'none';
+            var modal = document.getElementById('receptionModal');
+            modal.classList.remove('open');
+            setTimeout(function() {
+                modal.style.display = 'none';
+            }, 300);
         }
         // Close on escape key
         document.addEventListener('keydown', function(e) {
@@ -620,8 +632,24 @@
     </script>
 
     <!-- Reception App Modal -->
+    <style>
+        #receptionModal {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #receptionModal.open {
+            opacity: 1;
+        }
+        #receptionModal .modal-content {
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #receptionModal.open .modal-content {
+            transform: scale(1) translateY(0);
+        }
+    </style>
     <div id="receptionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center; padding:20px; box-sizing:border-box;" onclick="if(event.target===this)closeReceptionModal()">
-        <div style="position:relative; max-width:95vw; max-height:95vh; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 25px 80px rgba(0,0,0,0.5);">
+        <div class="modal-content" style="position:relative; max-width:95vw; max-height:95vh; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 25px 80px rgba(0,0,0,0.5);">
             <button onclick="closeReceptionModal()" style="position:absolute; top:10px; right:10px; width:36px; height:36px; border:none; background:rgba(0,0,0,0.7); color:white; border-radius:50%; cursor:pointer; font-size:20px; line-height:1; z-index:10001;">&times;</button>
             <div style="padding:15px 20px; background:linear-gradient(135deg, #dc3545 0%, #a71d2a 100%); color:white;">
                 <h3 style="margin:0; font-size:18px; font-weight:600;">Current Reception App</h3>

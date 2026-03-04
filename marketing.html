@@ -21,6 +21,35 @@
 
         .demo-container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        /* Top header section */
+        .top-header {
+            text-align: center;
+            color: #e0e0e0;
+        }
+        .top-header img {
+            max-width: 260px;
+            margin-bottom: 1rem;
+        }
+        .top-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .top-header .subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        /* Bottom content: phone + features side by side */
+        .content-row {
+            display: flex;
             align-items: center;
             gap: 4rem;
         }
@@ -146,19 +175,12 @@
 
         /* Responsive: stack on smaller screens */
         @media (max-width: 900px) {
-            .demo-container {
+            .content-row {
                 flex-direction: column;
                 gap: 2rem;
             }
-            .demo-info {
-                text-align: center;
-                order: -1;
-            }
             .demo-info .feature {
                 text-align: left;
-            }
-            .page-nav {
-                justify-content: center;
             }
         }
 
@@ -167,21 +189,27 @@
 </head>
 <body>
     <div class="demo-container">
-        <!-- Phone -->
-        <div class="phone-frame">
-            <div class="btn-silent"></div>
-            <div class="btn-volume-up"></div>
-            <div class="btn-volume-down"></div>
-            <div class="phone-screen">
-                <iframe id="phone-iframe" src="index.html"></iframe>
-            </div>
-        </div>
-
-        <!-- Info Panel -->
-        <div class="demo-info">
-            <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" style="max-width: 280px; margin-bottom: 1.5rem;" />
+        <!-- Top Header -->
+        <div class="top-header">
+            <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" />
             <h1>Team Member Connect</h1>
             <p class="subtitle">Mobile call-in portal for employees</p>
+        </div>
+
+        <!-- Content Row: Phone + Features -->
+        <div class="content-row">
+            <!-- Phone -->
+            <div class="phone-frame">
+                <div class="btn-silent"></div>
+                <div class="btn-volume-up"></div>
+                <div class="btn-volume-down"></div>
+                <div class="phone-screen">
+                    <iframe id="phone-iframe" src="index.html"></iframe>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="demo-info">
 
             <div class="feature">
                 <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15);">
@@ -234,6 +262,7 @@
             </div>
 
                     </div>
+        </div><!-- /content-row -->
     </div>
 
     

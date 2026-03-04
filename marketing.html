@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Team Member Connect — Tulalip Resort Casino</title>
+    <title>Team Member Connect — Overview</title>
     <link rel="icon" type="image/png" href="assets/media/logos/laneco-favicon-v2.png?v=3" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
@@ -13,29 +13,23 @@
             font-family: 'Inter', sans-serif;
             background: #1a1a2e;
             min-height: 100vh;
-            overflow: hidden;
-        }
-
-        .marketing-layout {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 2rem 3rem;
+            padding: 2rem;
+        }
+
+        .demo-container {
+            display: flex;
+            align-items: center;
             gap: 4rem;
         }
 
-        /* ── LEFT SIDE: PHONES ── */
-        .phones-showcase {
-            position: relative;
-            width: 480px;
-            height: 860px;
-            flex-shrink: 0;
-        }
-
-        /* Main phone - Dashboard */
+        /* iPhone 15 Pro frame */
         .phone-frame {
-            position: absolute;
+            position: relative;
+            width: 393px;
+            height: 852px;
             border-radius: 55px;
             background: #1c1c1e;
             padding: 12px;
@@ -46,28 +40,9 @@
                 0 0 100px rgba(99, 102, 241, 0.1);
         }
 
-        .phone-main {
-            width: 340px;
-            height: 736px;
-            top: 0;
-            left: 0;
-            z-index: 2;
-        }
+        /* Dynamic Island — disabled */
 
-        .phone-secondary {
-            width: 230px;
-            height: 498px;
-            bottom: 20px;
-            right: 0;
-            z-index: 3;
-            transform: rotate(3deg);
-            box-shadow:
-                0 0 0 2px #3a3a3c,
-                0 0 0 4px #1c1c1e,
-                0 25px 70px rgba(0, 0, 0, 0.6),
-                0 0 80px rgba(99, 102, 241, 0.15);
-        }
-
+        /* Screen */
         .phone-screen {
             width: 100%;
             height: 100%;
@@ -77,32 +52,29 @@
             position: relative;
         }
 
-        .phone-secondary .phone-screen {
-            border-radius: 30px;
-        }
-
         .phone-screen iframe {
             width: 100%;
             height: 100%;
             border: none;
-            pointer-events: none;
-            scrollbar-width: none;
+            scrollbar-width: none; /* Firefox */
+            pointer-events: auto;
         }
         .phone-screen iframe::-webkit-scrollbar {
-            display: none;
+            display: none; /* Chrome/Safari */
         }
 
-        /* Side buttons on main phone */
-        .phone-main::after {
+        /* Side buttons */
+        .phone-frame::after {
             content: '';
             position: absolute;
             right: -3px;
-            top: 160px;
+            top: 180px;
             width: 4px;
-            height: 70px;
+            height: 80px;
             background: #3a3a3c;
             border-radius: 0 2px 2px 0;
         }
+
         .btn-volume-up, .btn-volume-down, .btn-silent {
             position: absolute;
             left: -3px;
@@ -110,64 +82,34 @@
             background: #3a3a3c;
             border-radius: 2px 0 0 2px;
         }
-        .btn-silent { top: 115px; height: 24px; }
-        .btn-volume-up { top: 160px; height: 48px; }
-        .btn-volume-down { top: 218px; height: 48px; }
+        .btn-silent { top: 130px; height: 28px; }
+        .btn-volume-up { top: 185px; height: 55px; }
+        .btn-volume-down { top: 252px; height: 55px; }
 
-        /* Call-in label */
-        .phone-label {
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%) rotate(3deg);
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            z-index: 4;
-        }
-
-        /* ── RIGHT SIDE: INFO ── */
-        .marketing-info {
+        /* Info panel beside phone */
+        .demo-info {
             color: #e0e0e0;
-            max-width: 400px;
+            max-width: 360px;
         }
-
-        .marketing-info .logo-row {
-            margin-bottom: 1.5rem;
-        }
-        .marketing-info .logo-row img {
-            max-width: 260px;
-        }
-
-        .marketing-info h1 {
-            font-size: 2.4rem;
+        .demo-info h1 {
+            font-size: 2rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.4rem;
-            line-height: 1.15;
-            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
-
-        .marketing-info .subtitle {
-            font-size: 1.05rem;
+        .demo-info .subtitle {
+            font-size: 1rem;
             color: #9ca3af;
-            margin-bottom: 2.2rem;
-            line-height: 1.5;
+            margin-bottom: 2rem;
         }
-
-        .feature {
+        .demo-info .feature {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.5rem;
         }
-        .feature-icon {
+        .demo-info .feature-icon {
             width: 40px;
             height: 40px;
             border-radius: 10px;
@@ -177,130 +119,69 @@
             font-size: 1.2rem;
             flex-shrink: 0;
         }
-        .feature-title {
+        .demo-info .feature-title {
             font-weight: 600;
             font-size: 0.95rem;
             color: #fff;
             margin-bottom: 0.2rem;
         }
-        .feature-desc {
+        .demo-info .feature-desc {
             font-size: 0.85rem;
             color: #9ca3af;
             line-height: 1.5;
         }
-
-        /* Stats bar */
-        .stats-row {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 1.6rem;
-            font-weight: 700;
+        .demo-info .badge-trc {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: #fff;
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.7rem;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-top: 0.3rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
         }
 
-        /* Footer */
-        .marketing-footer {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 3rem;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.2);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        
 
-        /* Responsive */
-        @media (max-width: 1100px) {
-            .marketing-layout {
+        /* Responsive: stack on smaller screens */
+        @media (max-width: 900px) {
+            .demo-container {
                 flex-direction: column;
                 gap: 2rem;
-                padding: 2rem;
-                overflow-y: auto;
             }
-            .phones-showcase {
-                width: 380px;
-                height: 700px;
-            }
-            .phone-main {
-                width: 280px;
-                height: 606px;
-            }
-            .phone-secondary {
-                width: 190px;
-                height: 411px;
-            }
-            .marketing-info {
+            .demo-info {
                 text-align: center;
                 order: -1;
             }
-            .feature {
+            .demo-info .feature {
                 text-align: left;
             }
-            .stats-row {
+            .page-nav {
                 justify-content: center;
             }
         }
 
-        @media print {
-            body {
-                background: #1a1a2e !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            @page {
-                size: landscape;
-                margin: 0;
-            }
-        }
+        
     </style>
 </head>
 <body>
-    <div class="marketing-layout">
-        <!-- Phone Showcase -->
-        <div class="phones-showcase">
-            <!-- Main Phone: Dashboard -->
-            <div class="phone-frame phone-main">
-                <div class="btn-silent"></div>
-                <div class="btn-volume-up"></div>
-                <div class="btn-volume-down"></div>
-                <div class="phone-screen">
-                    <iframe src="index.html" scrolling="no"></iframe>
-                </div>
-            </div>
-
-            <!-- Secondary Phone: Call-In -->
-            <div class="phone-frame phone-secondary">
-                <div class="phone-screen">
-                    <iframe src="call-in.html" scrolling="no"></iframe>
-                </div>
-                <div class="phone-label">Call-In Wizard</div>
+    <div class="demo-container">
+        <!-- Phone -->
+        <div class="phone-frame">
+            <div class="btn-silent"></div>
+            <div class="btn-volume-up"></div>
+            <div class="btn-volume-down"></div>
+            <div class="phone-screen">
+                <iframe id="phone-iframe" src="index.html"></iframe>
             </div>
         </div>
 
         <!-- Info Panel -->
-        <div class="marketing-info">
-            <div class="logo-row">
-                <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" />
-            </div>
-
-            <h1>Team Member<br>Connect</h1>
-            <p class="subtitle">A mobile call-in portal that replaces phone calls with a 60-second self-service experience — from any team member's personal phone.</p>
+        <div class="demo-info">
+            <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" style="max-width: 280px; margin-bottom: 1.5rem;" />
+            <h1>Team Member Connect</h1>
+            <p class="subtitle">Mobile call-in portal for employees</p>
 
             <div class="feature">
                 <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15);">
@@ -308,7 +189,7 @@
                 </div>
                 <div>
                     <div class="feature-title">SMS Authentication</div>
-                    <div class="feature-desc">Employee number + phone verification. No passwords, no app download.</div>
+                    <div class="feature-desc">Team members log in with their phone number — no passwords to remember.</div>
                 </div>
             </div>
 
@@ -318,7 +199,7 @@
                 </div>
                 <div>
                     <div class="feature-title">Quick Call-In Submission</div>
-                    <div class="feature-desc">Guided wizard captures absence type, shift, and reason — under 60 seconds.</div>
+                    <div class="feature-desc">Step-by-step wizard captures shift, reason, and estimated return — under 60 seconds.</div>
                 </div>
             </div>
 
@@ -327,8 +208,8 @@
                     <i class="ki-outline ki-chart-line-up text-success fs-2"></i>
                 </div>
                 <div>
-                    <div class="feature-title">Full History &amp; Tracking</div>
-                    <div class="feature-desc">Every call-in tracked with real-time acknowledgment status.</div>
+                    <div class="feature-title">Full History & Tracking</div>
+                    <div class="feature-desc">Employees see their own call-in history with real-time acknowledgment status.</div>
                 </div>
             </div>
 
@@ -337,8 +218,8 @@
                     <i class="ki-outline ki-notification text-warning fs-2"></i>
                 </div>
                 <div>
-                    <div class="feature-title">Automated Notifications</div>
-                    <div class="feature-desc">Supervisors get instant alerts. No front desk relay needed.</div>
+                    <div class="feature-title">HR Announcements</div>
+                    <div class="feature-desc">Push targeted updates to employees — benefits, schedules, policy changes.</div>
                 </div>
             </div>
 
@@ -347,32 +228,20 @@
                     <i class="ki-outline ki-send text-primary fs-2"></i>
                 </div>
                 <div>
-                    <div class="feature-title">HR Announcements</div>
-                    <div class="feature-desc">Push benefits updates, schedule changes, and policy news to team members.</div>
+                    <div class="feature-title">Automated Department Notifications</div>
+                    <div class="feature-desc">Supervisors receive instant alerts when team members submit call-ins.</div>
                 </div>
             </div>
 
-            <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-value">&lt;60s</div>
-                    <div class="stat-label">To Submit</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">0</div>
-                    <div class="stat-label">Passwords</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">Available</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">0</div>
-                    <div class="stat-label">App Downloads</div>
-                </div>
-            </div>
-        </div>
+                    </div>
     </div>
 
-    <div class="marketing-footer">Lane &amp; Company</div>
+    
+
+    <script>
+        
+
+        
+    </script>
 </body>
 </html>

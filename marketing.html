@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Team Member Connect — Tulalip Resort Casino</title>
+    <link rel="icon" type="image/png" href="assets/media/logos/laneco-favicon-v2.png?v=3" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .marketing-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 3rem;
+            gap: 4rem;
+        }
+
+        /* ── LEFT SIDE: PHONES ── */
+        .phones-showcase {
+            position: relative;
+            width: 480px;
+            height: 860px;
+            flex-shrink: 0;
+        }
+
+        /* Main phone - Dashboard */
+        .phone-frame {
+            position: absolute;
+            border-radius: 55px;
+            background: #1c1c1e;
+            padding: 12px;
+            box-shadow:
+                0 0 0 2px #3a3a3c,
+                0 0 0 4px #1c1c1e,
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(99, 102, 241, 0.1);
+        }
+
+        .phone-main {
+            width: 340px;
+            height: 736px;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .phone-secondary {
+            width: 230px;
+            height: 498px;
+            bottom: 20px;
+            right: 0;
+            z-index: 3;
+            transform: rotate(3deg);
+            box-shadow:
+                0 0 0 2px #3a3a3c,
+                0 0 0 4px #1c1c1e,
+                0 25px 70px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(99, 102, 241, 0.15);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 44px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+        }
+
+        .phone-secondary .phone-screen {
+            border-radius: 30px;
+        }
+
+        .phone-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+            scrollbar-width: none;
+        }
+        .phone-screen iframe::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Side buttons on main phone */
+        .phone-main::after {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 160px;
+            width: 4px;
+            height: 70px;
+            background: #3a3a3c;
+            border-radius: 0 2px 2px 0;
+        }
+        .btn-volume-up, .btn-volume-down, .btn-silent {
+            position: absolute;
+            left: -3px;
+            width: 4px;
+            background: #3a3a3c;
+            border-radius: 2px 0 0 2px;
+        }
+        .btn-silent { top: 115px; height: 24px; }
+        .btn-volume-up { top: 160px; height: 48px; }
+        .btn-volume-down { top: 218px; height: 48px; }
+
+        /* Call-in label */
+        .phone-label {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(3deg);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: 4;
+        }
+
+        /* ── RIGHT SIDE: INFO ── */
+        .marketing-info {
+            color: #e0e0e0;
+            max-width: 400px;
+        }
+
+        .marketing-info .logo-row {
+            margin-bottom: 1.5rem;
+        }
+        .marketing-info .logo-row img {
+            max-width: 260px;
+        }
+
+        .marketing-info h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.4rem;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .marketing-info .subtitle {
+            font-size: 1.05rem;
+            color: #9ca3af;
+            margin-bottom: 2.2rem;
+            line-height: 1.5;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .feature-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+        .feature-desc {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Stats bar */
+        .stats-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 0.3rem;
+        }
+
+        /* Footer */
+        .marketing-footer {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 3rem;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .marketing-layout {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 2rem;
+                overflow-y: auto;
+            }
+            .phones-showcase {
+                width: 380px;
+                height: 700px;
+            }
+            .phone-main {
+                width: 280px;
+                height: 606px;
+            }
+            .phone-secondary {
+                width: 190px;
+                height: 411px;
+            }
+            .marketing-info {
+                text-align: center;
+                order: -1;
+            }
+            .feature {
+                text-align: left;
+            }
+            .stats-row {
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="marketing-layout">
+        <!-- Phone Showcase -->
+        <div class="phones-showcase">
+            <!-- Main Phone: Dashboard -->
+            <div class="phone-frame phone-main">
+                <div class="btn-silent"></div>
+                <div class="btn-volume-up"></div>
+                <div class="btn-volume-down"></div>
+                <div class="phone-screen">
+                    <iframe src="index.html" scrolling="no"></iframe>
+                </div>
+            </div>
+
+            <!-- Secondary Phone: Call-In -->
+            <div class="phone-frame phone-secondary">
+                <div class="phone-screen">
+                    <iframe src="call-in.html" scrolling="no"></iframe>
+                </div>
+                <div class="phone-label">Call-In Wizard</div>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="marketing-info">
+            <div class="logo-row">
+                <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" />
+            </div>
+
+            <h1>Team Member<br>Connect</h1>
+            <p class="subtitle">A mobile call-in portal that replaces phone calls with a 60-second self-service experience — from any team member's personal phone.</p>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15);">
+                    <i class="ki-outline ki-sms text-danger fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">SMS Authentication</div>
+                    <div class="feature-desc">Employee number + phone verification. No passwords, no app download.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(99, 102, 241, 0.15);">
+                    <i class="ki-outline ki-time text-primary fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Quick Call-In Submission</div>
+                    <div class="feature-desc">Guided wizard captures absence type, shift, and reason — under 60 seconds.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(34, 197, 94, 0.15);">
+                    <i class="ki-outline ki-chart-line-up text-success fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Full History &amp; Tracking</div>
+                    <div class="feature-desc">Every call-in tracked with real-time acknowledgment status.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(234, 179, 8, 0.15);">
+                    <i class="ki-outline ki-notification text-warning fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">Automated Notifications</div>
+                    <div class="feature-desc">Supervisors get instant alerts. No front desk relay needed.</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon" style="background: rgba(139, 92, 246, 0.15);">
+                    <i class="ki-outline ki-send text-primary fs-2"></i>
+                </div>
+                <div>
+                    <div class="feature-title">HR Announcements</div>
+                    <div class="feature-desc">Push benefits updates, schedule changes, and policy news to team members.</div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-value">&lt;60s</div>
+                    <div class="stat-label">To Submit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Passwords</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">App Downloads</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="marketing-footer">Lane &amp; Company</div>
+</body>
+</html>

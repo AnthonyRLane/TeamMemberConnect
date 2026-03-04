@@ -35,8 +35,7 @@
         /* ── Hero Section ── */
         .hero {
             position: relative;
-            padding: 0.4in 0.65in 0;
-            text-align: center;
+            padding: 0;
             overflow: hidden;
         }
 
@@ -45,60 +44,57 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5.2in;
+            height: 5in;
             background: #0c1b30;
             z-index: 0;
         }
 
-        /* Clean hard edge — no gradient fade */
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: #ffffff;
-            border-radius: 30px 30px 0 0;
-        }
-
-        .hero-content {
+        .hero-inner {
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: flex-start;
+            padding: 0.5in 0.55in 0;
+            gap: 0.3in;
+        }
+
+        /* Left: text content */
+        .hero-text {
+            flex: 0 0 2.8in;
+            padding-top: 0.15in;
         }
 
         .hero-logo {
-            width: 180px;
-            margin-bottom: 0.12in;
+            width: 170px;
+            margin-bottom: 0.15in;
             filter: brightness(1.1);
         }
 
         .hero h1 {
-            font-size: 32pt;
+            font-size: 30pt;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 0.06in;
+            line-height: 1.08;
+            margin-bottom: 0.1in;
         }
 
         .hero .tagline {
-            font-size: 13pt;
+            font-size: 11pt;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255, 255, 255, 0.6);
             letter-spacing: 0.01em;
-            margin-bottom: 0.3in;
+            line-height: 1.5;
         }
 
-        /* ── Phone Mockups ── */
-        /* Use exact demo.html phone frame (393×852) and scale the whole thing down */
+        /* Right: phones */
         .phones-container {
+            flex: 1;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            height: 3.6in;
-            z-index: 2;
+            height: 4.5in;
         }
 
         /* Exact iPhone 15 Pro frame from demo.html */
@@ -113,6 +109,9 @@
                 0 0 0 2px #3a3a3c,
                 0 0 0 4px #1c1c1e,
                 0 20px 60px rgba(0, 0, 0, 0.5);
+            /* Both phones: same scale */
+            transform: scale(0.32);
+            transform-origin: bottom center;
         }
 
         .phone-frame .screen {
@@ -130,7 +129,7 @@
             pointer-events: none;
         }
 
-        /* Side buttons (from demo) */
+        /* Side buttons */
         .phone-frame::after {
             content: '';
             position: absolute;
@@ -153,34 +152,36 @@
         .btn-volume-up { top: 185px; height: 55px; }
         .btn-volume-down { top: 252px; height: 55px; }
 
-        /* Scale the entire frame down to fit the page */
-        /* 0.35 scale: 393*0.35=137px wide, 852*0.35=298px tall */
         .phone-primary {
-            transform: scale(0.35);
-            transform-origin: bottom center;
             z-index: 2;
-            margin: 0 -110px; /* compensate for transform not affecting layout */
+            margin: 0 -105px;
         }
 
         .phone-secondary {
-            transform: scale(0.30) perspective(1000px) rotateY(-5deg);
-            transform-origin: bottom center;
             z-index: 1;
-            margin: 0 -120px;
+            margin: 0 -105px;
         }
 
         /* Labels under phones */
         .phone-label {
             position: absolute;
-            bottom: -28px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 20px; /* scaled up because parent is scaled down */
+            font-size: 22px; /* scaled up to compensate for parent scale */
             font-weight: 600;
             color: #86868b;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             white-space: nowrap;
+        }
+
+        /* Divider between hero and features */
+        .hero-divider {
+            height: 0;
+            border: none;
+            border-top: 1px solid #e8e8ed;
+            margin: 0 0.55in;
         }
 
         /* ── Features Section ── */
@@ -368,15 +369,15 @@
 </head>
 <body>
     <div class="page">
-        <!-- Hero -->
+        <!-- Hero: split layout — text left, phones right -->
         <div class="hero">
             <div class="hero-bg"></div>
-            <div class="hero-content">
-                <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" class="hero-logo" />
-                <h1>Team Member<br>Connect</h1>
-                <p class="tagline">A smarter way to manage employee call-ins.</p>
-
-                <!-- Phone Mockups — exact demo.html frame scaled down -->
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <img src="assets/media/logos/tulalip-resort-casino.webp" alt="Tulalip Resort Casino" class="hero-logo" />
+                    <h1>Team Member<br>Connect</h1>
+                    <p class="tagline">A smarter way to manage<br>employee call-ins.</p>
+                </div>
                 <div class="phones-container">
                     <div class="phone-frame phone-primary">
                         <div class="btn-silent"></div>
@@ -399,6 +400,7 @@
                 </div>
             </div>
         </div>
+        <hr class="hero-divider" />
 
         <!-- Features -->
         <div class="features">

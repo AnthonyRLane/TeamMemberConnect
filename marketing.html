@@ -24,7 +24,8 @@
         }
 
         .page {
-            width: 8.5in;
+            width: 100%;
+            max-width: 8.5in;
             min-height: 11in;
             margin: 0 auto;
             overflow: hidden;
@@ -38,17 +39,16 @@
             padding: 0;
             overflow: hidden;
             background: #0c1b30;
-        }
-
-        .hero-bg {
-            display: none;
+            /* Break out of .page to span full viewport width */
+            width: 100vw;
+            margin-left: calc(-1 * (100vw - 100%) / 2);
         }
 
         .hero-inner {
             position: relative;
             z-index: 2;
             display: flex;
-            align-items: flex-start;
+            align-items: flex-end;
             padding: 0.5in 0.55in 0;
             gap: 0.3in;
             max-width: 8.5in;
@@ -58,7 +58,7 @@
         /* Left: text content */
         .hero-text {
             flex: 0 0 2.8in;
-            padding-top: 0.15in;
+            padding-bottom: 1.5in;
         }
 
         .hero-logo {

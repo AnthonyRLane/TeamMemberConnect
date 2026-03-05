@@ -31,6 +31,7 @@
             padding: 0;
             overflow: visible;
             background: #0c1b30;
+            z-index: 1;
         }
 
         .hero-inner {
@@ -81,7 +82,7 @@
             justify-content: center;
             align-items: flex-start;
             height: 5in;
-            overflow: hidden;
+            overflow: visible;
         }
 
         /* Exact iPhone 15 Pro frame from demo.html */
@@ -148,12 +149,12 @@
 
         .phone-primary {
             z-index: 2;
-            margin: 0 -80px;
+            margin: 0.8in -80px 0;
         }
 
         .phone-secondary {
             z-index: 1;
-            margin: 0 -80px;
+            margin: 0.8in -80px 0;
         }
 
         /* Labels under phones */
@@ -181,6 +182,8 @@
         /* ── Features Section ── */
         .features {
             padding: 0.15in 0.65in 0;
+            position: relative;
+            z-index: 0;
         }
 
         .features-grid {

@@ -37,16 +37,11 @@
             position: relative;
             padding: 0;
             overflow: hidden;
+            background: #0c1b30;
         }
 
         .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5in;
-            background: #0c1b30;
-            z-index: 0;
+            display: none;
         }
 
         .hero-inner {
@@ -56,6 +51,8 @@
             align-items: flex-start;
             padding: 0.5in 0.55in 0;
             gap: 0.3in;
+            max-width: 8.5in;
+            margin: 0 auto;
         }
 
         /* Left: text content */
@@ -126,6 +123,14 @@
             height: 100%;
             border: none;
             pointer-events: none;
+        }
+
+        .phone-frame .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
         }
 
         /* Side buttons */
@@ -340,7 +345,7 @@
                         <div class="btn-volume-up"></div>
                         <div class="btn-volume-down"></div>
                         <div class="screen">
-                            <iframe src="index.html" loading="lazy"></iframe>
+                            <img src="assets/media/screenshots/dashboard.png" alt="Dashboard" />
                         </div>
                         <div class="phone-label">Dashboard</div>
                     </div>
@@ -349,7 +354,7 @@
                         <div class="btn-volume-up"></div>
                         <div class="btn-volume-down"></div>
                         <div class="screen">
-                            <iframe src="call-in.html" loading="lazy"></iframe>
+                            <img src="assets/media/screenshots/call-in.png" alt="Call-In Wizard" />
                         </div>
                         <div class="phone-label">Call-In Wizard</div>
                     </div>

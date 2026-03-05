@@ -37,7 +37,7 @@
             position: relative;
             z-index: 2;
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             padding: 0.5in 0.55in 0;
             gap: 0.3in;
             max-width: 8.5in;
@@ -47,7 +47,7 @@
         /* Left: text content */
         .hero-text {
             flex: 0 0 2.8in;
-            padding-bottom: 1.5in;
+            padding-top: 0.5in;
         }
 
         .hero-logo {
@@ -79,8 +79,9 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: flex-start;
             height: 5in;
+            overflow: hidden;
         }
 
         /* Exact iPhone 15 Pro frame from demo.html */
@@ -96,7 +97,7 @@
                 0 0 0 4px #1c1c1e,
                 0 20px 60px rgba(0, 0, 0, 0.5);
             transform: scale(0.52);
-            transform-origin: bottom center;
+            transform-origin: top center;
         }
 
         .phone-frame .screen {

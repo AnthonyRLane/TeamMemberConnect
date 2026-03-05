@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Team Member Connect — App Screenshots</title>
+    <link rel="icon" type="image/png" href="assets/media/logos/laneco-favicon-v2.png?v=3" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"/>
+    <style>
+        @page {
+            size: 8.5in 11in;
+            margin: 0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: #1d1d1f;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: #0c1b30;
+            padding: 0.35in 0.5in;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header img {
+            height: 32px;
+        }
+
+        .header h1 {
+            font-size: 16pt;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .header .subtitle {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+        }
+
+        /* ── Phone Grid ── */
+        .grid-container {
+            padding: 0.3in 0.4in 0.2in;
+        }
+
+        .phone-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.2in;
+            justify-items: center;
+        }
+
+        .phone-item {
+            text-align: center;
+        }
+
+        /* iPhone frame — exact 393:852 ratio, scaled to ~1.55in wide */
+        .mini-phone {
+            position: relative;
+            width: 148px;
+            height: 321px; /* 148 * (852/393) */
+            border-radius: 20px;
+            background: #1c1c1e;
+            padding: 4px;
+            box-shadow:
+                0 0 0 1px #3a3a3c,
+                0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .mini-phone .screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .mini-phone .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        /* Side button */
+        .mini-phone::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 65px;
+            width: 2px;
+            height: 28px;
+            background: #3a3a3c;
+            border-radius: 0 1px 1px 0;
+        }
+
+        .phone-caption {
+            margin-top: 6px;
+            font-size: 7pt;
+            font-weight: 600;
+            color: #86868b;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            body { background: #fff; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="assets/media/logos/laneco-logo-full-white.png" alt="Lane &amp; Company" />
+        </div>
+        <div>
+            <h1>Team Member Connect</h1>
+            <div class="subtitle">Application Screenshots</div>
+        </div>
+    </div>
+
+    <!-- 3×3 Phone Grid -->
+    <div class="grid-container">
+        <div class="phone-grid">
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/01-login.png" alt="Login" />
+                    </div>
+                </div>
+                <div class="phone-caption">Login</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/02-dashboard.png" alt="Dashboard" />
+                    </div>
+                </div>
+                <div class="phone-caption">Dashboard</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/09-announcements.png" alt="Announcements" />
+                    </div>
+                </div>
+                <div class="phone-caption">Announcements</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/03-dashboard-history.png" alt="Call-In History" />
+                    </div>
+                </div>
+                <div class="phone-caption">Call-In History</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/04-callin-absence.png" alt="Absence Type" />
+                    </div>
+                </div>
+                <div class="phone-caption">Absence Type</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/05-callin-shift.png" alt="Shift Details" />
+                    </div>
+                </div>
+                <div class="phone-caption">Shift Details</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/06-callin-info.png" alt="Additional Info" />
+                    </div>
+                </div>
+                <div class="phone-caption">Additional Info</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/07-callin-review.png" alt="Review" />
+                    </div>
+                </div>
+                <div class="phone-caption">Review</div>
+            </div>
+
+            <div class="phone-item">
+                <div class="mini-phone">
+                    <div class="screen">
+                        <img src="assets/media/screenshots/08-callin-done.png" alt="Confirmation" />
+                    </div>
+                </div>
+                <div class="phone-caption">Confirmation</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

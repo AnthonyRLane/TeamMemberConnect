@@ -19,6 +19,9 @@
             background: #ffffff;
             color: #1d1d1f;
             -webkit-font-smoothing: antialiased;
+            min-height: 11in;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ── Header ── */
@@ -60,7 +63,7 @@
 
         .phone-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 0.2in;
             justify-items: center;
         }
@@ -117,6 +120,23 @@
             color: #86868b;
             letter-spacing: 0.04em;
             text-transform: uppercase;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: #0c1b30;
+            padding: 0.35in 0.5in;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer span {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
 
         @media print {
@@ -211,6 +231,10 @@
                 <div class="phone-caption">Confirmation</div>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <span>laneandcompany.dev</span>
     </div>
 </body>
 </html>

@@ -13,7 +13,7 @@
   "quickActions": {
     "callIn": "Mag-call in",
     "callInDesc": "I-submit ang pagliban",
-    "history": "History",
+    "history": "Kasaysayan",
     "historyDesc": "Mga dating call-in"
   },
   "hr": {
@@ -24,7 +24,7 @@
       "desc": "Magsasara ang benefits enrollment sa Marso 15. Dumaan sa HR o gamitin ang benefits portal para ma-review ang mga pagpipilian mo."
     },
     "referral": {
-      "title": "Employee Referral Program",
+      "title": "Programa ng Referral",
       "desc": "Mag-refer ng kwalipikadong kandidato at kumita ng hanggang $500. Makipag-ugnayan sa HR para sa detalye ng mga eligible na posisyon."
     },
     "timeAgo": {
@@ -61,9 +61,9 @@
     "today": "Ngayon",
     "shift": "Shift",
     "department": "Departamento",
-    "morning": "Morning",
-    "swing": "Swing",
-    "grave": "Grave",
+    "morning": "Umaga",
+    "swing": "Hapon",
+    "grave": "Gabi",
     "other": "Iba",
     "timeRange": {
       "morning": "6:00 AM — 2:00 PM",
@@ -88,13 +88,13 @@
     "step1": "Uri ng Pagliban",
     "step2": "Detalye ng Shift",
     "step3": "Impormasyon",
-    "step4": "Review",
+    "step4": "Suriin",
     "step5": "Tapos",
     "whatType": "Anong uri ng pagliban ito?",
     "selectOption": "Piliin ang opsyon na pinakaangkop sa sitwasyon mo.",
     "fullDay": "Buong Araw",
     "fullDayDesc": "Hindi ako makakapasok ngayon",
-    "lateArrival": "Late Arrival",
+    "lateArrival": "Malelate",
     "lateArrivalDesc": "Papasok ako pero male-late lang",
     "earlyDeparture": "Maagang Pag-alis",
     "earlyDepartureDesc": "Kailangan kong umalis bago matapos ang shift ko",
@@ -126,7 +126,7 @@
     "done": {
       "title": "Naipasa na ang Call-In!",
       "desc": "Naabisuhan na ang supervisor mo. Makakatanggap ka ng text kapag naacknowledge na ito.",
-      "confirmation": "Confirmation #",
+      "confirmation": "Kumpirmasyon #",
       "backToDashboard": "Bumalik sa Dashboard",
       "submitAnother": "Mag-submit ng Isa Pang Call-In"
     }
@@ -140,8 +140,8 @@
     "signOut": "Mag-sign out"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
+    "light": "Maliwanag",
+    "dark": "Madilim",
     "system": "System"
   },
   "lang": {
@@ -153,7 +153,7 @@
     "illness": "May sakit / Masama ang pakiramdam",
     "family": "Emergency sa pamilya",
     "car": "Problema sa sasakyan / Transportasyon",
-    "appointment": "Medical / Dental Appointment",
+    "appointment": "Medikal / Dental na Appointment",
     "personal": "Personal na emergency",
     "childcare": "Problema sa childcare",
     "bereavement": "Pagdadalamhati",

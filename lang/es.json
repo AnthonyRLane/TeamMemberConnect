@@ -8,7 +8,7 @@
     "morning": "Buenos días",
     "afternoon": "Buenas tardes",
     "evening": "Buenas noches",
-    "title": "Dealer — Juegos de mesa"
+    "title": "Crupier — Juegos de Mesa"
   },
   "quickActions": {
     "callIn": "Reportar ausencia",
@@ -24,7 +24,7 @@
       "desc": "La inscripción de beneficios cierra el 15 de marzo. Visite a Recursos Humanos o use el portal de beneficios para revisar sus opciones."
     },
     "referral": {
-      "title": "Programa de recomendación de empleados",
+      "title": "Programa de Referidos",
       "desc": "Refiera a un candidato calificado y gane hasta $500. Comuníquese con Recursos Humanos para conocer los puestos elegibles."
     },
     "timeAgo": {
@@ -46,9 +46,9 @@
     "multipleDays": "Ausencia — Varios días",
     "acknowledged": "Confirmado",
     "submitted": "Enviado",
-    "morningShift": "Turno de mañana",
-    "swingShift": "Turno de tarde",
-    "graveShift": "Turno de noche",
+    "morningShift": "Turno de Mañana",
+    "swingShift": "Turno de Tarde",
+    "graveShift": "Turno de Noche",
     "reason": {
       "flu": "No me siento bien, síntomas de gripe",
       "carTrouble": "Problemas con el auto, esperando grúa",
@@ -70,7 +70,7 @@
       "swing": "2:00 PM — 10:00 PM",
       "grave": "10:00 PM — 6:00 AM"
     },
-    "dayOff": "Día libre",
+    "dayOff": "Día Libre",
     "hours": "Horas programadas",
     "overtime": "Horas extra en este periodo"
   },
@@ -94,7 +94,7 @@
     "selectOption": "Seleccione la opción que mejor describa su situación.",
     "fullDay": "Día completo",
     "fullDayDesc": "No podré presentarme hoy",
-    "lateArrival": "Llegada tarde",
+    "lateArrival": "Llegada Tarde",
     "lateArrivalDesc": "Sí iré, solo llegaré tarde",
     "earlyDeparture": "Salida anticipada",
     "earlyDepartureDesc": "Necesito salir antes de que termine mi turno",
@@ -153,7 +153,7 @@
     "illness": "Enfermedad / No me siento bien",
     "family": "Emergencia familiar",
     "car": "Problemas con el auto / Transporte",
-    "appointment": "Cita médica / dental",
+    "appointment": "Cita Médica / Dental",
     "personal": "Emergencia personal",
     "childcare": "Problema con el cuidado infantil",
     "bereavement": "Duelo",

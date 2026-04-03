@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "teamMemberConnect": "Team Member Connect",
+    "home": "Home"
+  },
+  "greeting": {
+    "morning": "Magandang umaga",
+    "afternoon": "Magandang hapon",
+    "evening": "Magandang gabi",
+    "title": "Dealer — Table Games"
+  },
+  "quickActions": {
+    "callIn": "Mag-call in",
+    "callInDesc": "I-submit ang pagliban",
+    "history": "History",
+    "historyDesc": "Mga dating call-in"
+  },
+  "hr": {
+    "title": "Mga anunsyo ng HR",
+    "viewAll": "Tingnan lahat",
+    "openEnrollment": {
+      "title": "Paalala sa Open Enrollment",
+      "desc": "Magsasara ang benefits enrollment sa Marso 15. Dumaan sa HR o gamitin ang benefits portal para ma-review ang mga pagpipilian mo."
+    },
+    "referral": {
+      "title": "Employee Referral Program",
+      "desc": "Mag-refer ng kwalipikadong kandidato at kumita ng hanggang $500. Makipag-ugnayan sa HR para sa detalye ng mga eligible na posisyon."
+    },
+    "timeAgo": {
+      "2days": "2 araw ang nakalipas",
+      "5days": "5 araw ang nakalipas"
+    }
+  },
+  "stats": {
+    "title": "Buod ng Call-In",
+    "today": "Ngayon",
+    "thisMonth": "Ngayong buwan",
+    "last90": "Huling 90 araw"
+  },
+  "history": {
+    "title": "History ng Call-In",
+    "fullDay": "Liban — Buong Araw",
+    "lateArrival": "Late Arrival — 2 Oras",
+    "earlyDeparture": "Maagang Pag-alis",
+    "multipleDays": "Liban — Mahigit Isang Araw",
+    "acknowledged": "Nakumpirma",
+    "submitted": "Naipasa",
+    "morningShift": "Morning Shift",
+    "swingShift": "Swing Shift",
+    "graveShift": "Grave Shift",
+    "reason": {
+      "flu": "Masama ang pakiramdam, may sintomas ng flu",
+      "carTrouble": "Problema sa sasakyan, naghihintay ng tow truck",
+      "childCare": "Emergency sa childcare",
+      "appointment": "May naka-schedule na appointment"
+    }
+  },
+  "schedule": {
+    "title": "Aking Schedule",
+    "today": "Ngayon",
+    "shift": "Shift",
+    "department": "Departamento",
+    "morning": "Morning",
+    "swing": "Swing",
+    "grave": "Grave",
+    "other": "Iba",
+    "timeRange": {
+      "morning": "6:00 AM — 2:00 PM"
+    },
+    "dayOff": "Day Off",
+    "hours": "Naka-schedule na oras",
+    "overtime": "Overtime sa period na ito"
+  },
+  "days": {
+    "mon": "Lun",
+    "tue": "Mar",
+    "wed": "Miy",
+    "thu": "Huw",
+    "fri": "Biy",
+    "sat": "Sab",
+    "sun": "Lin"
+  },
+  "callin": {
+    "title": "I-submit ang Call-In",
+    "step1": "Uri ng Pagliban",
+    "step2": "Detalye ng Shift",
+    "step3": "Impormasyon",
+    "step4": "Review",
+    "step5": "Tapos",
+    "whatType": "Anong uri ng pagliban ito?",
+    "selectOption": "Piliin ang opsyon na pinakaangkop sa sitwasyon mo.",
+    "fullDay": "Buong Araw",
+    "fullDayDesc": "Hindi ako makakapasok ngayon",
+    "lateArrival": "Late Arrival",
+    "lateArrivalDesc": "Papasok ako pero male-late lang",
+    "earlyDeparture": "Maagang Pag-alis",
+    "earlyDepartureDesc": "Kailangan kong umalis bago matapos ang shift ko",
+    "multipleDays": "Mahigit Isang Araw",
+    "multipleDaysDesc": "Aabsent ako nang higit sa isang araw",
+    "shiftDetails": "Detalye ng Shift",
+    "tellUs": "Sabihin sa amin ang tungkol sa naka-schedule mong shift.",
+    "absenceDate": "Petsa ng pagliban",
+    "selectDate": "Pumili ng petsa",
+    "yourShift": "Iyong shift",
+    "shiftStart": "Oras ng simula ng shift",
+    "shiftEnd": "Oras ng pagtatapos ng shift",
+    "info": "Impormasyon",
+    "additionalInfo": "Karagdagang impormasyon",
+    "reason": "Dahilan ng pagliban",
+    "selectReason": "Pumili ng dahilan",
+    "estimatedArrival": "Tinatayang oras ng dating",
+    "estimatedDeparture": "Tinatayang oras ng pag-alis",
+    "datesRange": "Saklaw ng mga petsa",
+    "additionalNotes": "Karagdagang tala",
+    "notesPlaceholder": "Anumang detalye para sa supervisor mo...",
+    "review": "I-review ang Call-In Mo",
+    "reviewDesc": "Kumpirmahing tama ang lahat.",
+    "absenceType": "Uri ng pagliban",
+    "date": "Petsa",
+    "shift": "Shift",
+    "reasonLabel": "Dahilan",
+    "notes": "Mga tala",
+    "done": {
+      "title": "Naipasa na ang Call-In!",
+      "desc": "Naabisuhan na ang supervisor mo. Makakatanggap ka ng text kapag naacknowledge na ito.",
+      "confirmation": "Confirmation #",
+      "backToDashboard": "Bumalik sa Dashboard",
+      "submitAnother": "Mag-submit ng Isa Pang Call-In"
+    }
+  },
+  "btn": {
+    "continue": "Magpatuloy",
+    "back": "Bumalik",
+    "submit": "Ipasa",
+    "cancel": "Kanselahin",
+    "viewAll": "Tingnan lahat",
+    "signOut": "Mag-sign out"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "lang": {
+    "en": "English",
+    "es": "Español",
+    "tl": "Tagalog"
+  },
+  "reason": {
+    "illness": "May sakit / Masama ang pakiramdam",
+    "family": "Emergency sa pamilya",
+    "car": "Problema sa sasakyan / Transportasyon",
+    "appointment": "Medical / Dental Appointment",
+    "personal": "Personal na emergency",
+    "childcare": "Problema sa childcare",
+    "bereavement": "Pagdadalamhati",
+    "other": "Iba"
+  }
+}

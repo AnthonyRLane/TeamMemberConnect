@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "teamMemberConnect": "Team Member Connect",
+    "home": "Inicio"
+  },
+  "greeting": {
+    "morning": "Buenos días",
+    "afternoon": "Buenas tardes",
+    "evening": "Buenas noches",
+    "title": "Dealer — Juegos de mesa"
+  },
+  "quickActions": {
+    "callIn": "Reportar ausencia",
+    "callInDesc": "Enviar aviso de ausencia",
+    "history": "Historial",
+    "historyDesc": "Avisos anteriores"
+  },
+  "hr": {
+    "title": "Anuncios de Recursos Humanos",
+    "viewAll": "Ver todo",
+    "openEnrollment": {
+      "title": "Recordatorio de inscripción abierta",
+      "desc": "La inscripción de beneficios cierra el 15 de marzo. Visite a Recursos Humanos o use el portal de beneficios para revisar sus opciones."
+    },
+    "referral": {
+      "title": "Programa de recomendación de empleados",
+      "desc": "Refiera a un candidato calificado y gane hasta $500. Comuníquese con Recursos Humanos para conocer los puestos elegibles."
+    },
+    "timeAgo": {
+      "2days": "Hace 2 días",
+      "5days": "Hace 5 días"
+    }
+  },
+  "stats": {
+    "title": "Resumen de ausencias",
+    "today": "Hoy",
+    "thisMonth": "Este mes",
+    "last90": "Últimos 90 días"
+  },
+  "history": {
+    "title": "Historial de ausencias",
+    "fullDay": "Ausencia — Día completo",
+    "lateArrival": "Llegada tarde — 2 horas",
+    "earlyDeparture": "Salida anticipada",
+    "multipleDays": "Ausencia — Varios días",
+    "acknowledged": "Confirmado",
+    "submitted": "Enviado",
+    "morningShift": "Turno de mañana",
+    "swingShift": "Turno de tarde",
+    "graveShift": "Turno de noche",
+    "reason": {
+      "flu": "No me siento bien, síntomas de gripe",
+      "carTrouble": "Problemas con el auto, esperando grúa",
+      "childCare": "Emergencia de cuidado infantil",
+      "appointment": "Cita programada"
+    }
+  },
+  "schedule": {
+    "title": "Mi horario",
+    "today": "Hoy",
+    "shift": "Turno",
+    "department": "Departamento",
+    "morning": "Mañana",
+    "swing": "Tarde",
+    "grave": "Noche",
+    "other": "Otro",
+    "timeRange": {
+      "morning": "6:00 AM — 2:00 PM"
+    },
+    "dayOff": "Día libre",
+    "hours": "Horas programadas",
+    "overtime": "Horas extra en este periodo"
+  },
+  "days": {
+    "mon": "Lun",
+    "tue": "Mar",
+    "wed": "Mié",
+    "thu": "Jue",
+    "fri": "Vie",
+    "sat": "Sáb",
+    "sun": "Dom"
+  },
+  "callin": {
+    "title": "Enviar aviso de ausencia",
+    "step1": "Tipo de ausencia",
+    "step2": "Detalles del turno",
+    "step3": "Información",
+    "step4": "Revisar",
+    "step5": "Listo",
+    "whatType": "¿Qué tipo de ausencia es?",
+    "selectOption": "Seleccione la opción que mejor describa su situación.",
+    "fullDay": "Día completo",
+    "fullDayDesc": "No podré presentarme hoy",
+    "lateArrival": "Llegada tarde",
+    "lateArrivalDesc": "Sí iré, solo llegaré tarde",
+    "earlyDeparture": "Salida anticipada",
+    "earlyDepartureDesc": "Necesito salir antes de que termine mi turno",
+    "multipleDays": "Varios días",
+    "multipleDaysDesc": "Estaré ausente por más de un día",
+    "shiftDetails": "Detalles del turno",
+    "tellUs": "Cuéntenos sobre su turno programado.",
+    "absenceDate": "Fecha de ausencia",
+    "selectDate": "Seleccione una fecha",
+    "yourShift": "Su turno",
+    "shiftStart": "Hora de inicio del turno",
+    "shiftEnd": "Hora de fin del turno",
+    "info": "Información",
+    "additionalInfo": "Información adicional",
+    "reason": "Motivo de la ausencia",
+    "selectReason": "Seleccione un motivo",
+    "estimatedArrival": "Hora estimada de llegada",
+    "estimatedDeparture": "Hora estimada de salida",
+    "datesRange": "Rango de fechas",
+    "additionalNotes": "Notas adicionales",
+    "notesPlaceholder": "Cualquier detalle para su supervisor...",
+    "review": "Revise su aviso de ausencia",
+    "reviewDesc": "Confirme que todo esté correcto.",
+    "absenceType": "Tipo de ausencia",
+    "date": "Fecha",
+    "shift": "Turno",
+    "reasonLabel": "Motivo",
+    "notes": "Notas adicionales",
+    "done": {
+      "title": "¡Aviso de ausencia enviado!",
+      "desc": "Su supervisor ya fue notificado. Recibirá un mensaje de texto cuando se confirme.",
+      "confirmation": "Confirmación #",
+      "backToDashboard": "Volver al panel",
+      "submitAnother": "Enviar otro aviso de ausencia"
+    }
+  },
+  "btn": {
+    "continue": "Continuar",
+    "back": "Atrás",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "viewAll": "Ver todo",
+    "signOut": "Cerrar sesión"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "lang": {
+    "en": "English",
+    "es": "Español",
+    "tl": "Tagalog"
+  },
+  "reason": {
+    "illness": "Enfermedad / No me siento bien",
+    "family": "Emergencia familiar",
+    "car": "Problemas con el auto / Transporte",
+    "appointment": "Cita médica / dental",
+    "personal": "Emergencia personal",
+    "childcare": "Problema con el cuidado infantil",
+    "bereavement": "Duelo",
+    "other": "Otro"
+  }
+}

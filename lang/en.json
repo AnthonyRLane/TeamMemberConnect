@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "teamMemberConnect": "Team Member Connect",
+    "home": "Home"
+  },
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "title": "Dealer — Table Games"
+  },
+  "quickActions": {
+    "callIn": "Call In",
+    "callInDesc": "Submit absence",
+    "history": "History",
+    "historyDesc": "Past call-ins"
+  },
+  "hr": {
+    "title": "HR Announcements",
+    "viewAll": "View All",
+    "openEnrollment": {
+      "title": "Open Enrollment Reminder",
+      "desc": "Benefits enrollment closes March 15. Visit HR or use the benefits portal to review your options."
+    },
+    "referral": {
+      "title": "Employee Referral Program",
+      "desc": "Refer a qualified candidate and earn up to $500. Contact HR for details on eligible positions."
+    },
+    "timeAgo": {
+      "2days": "2 days ago",
+      "5days": "5 days ago"
+    }
+  },
+  "stats": {
+    "title": "Call-In Summary",
+    "today": "Today",
+    "thisMonth": "This Month",
+    "last90": "Last 90 Days"
+  },
+  "history": {
+    "title": "Call-In History",
+    "fullDay": "Absent — Full Day",
+    "lateArrival": "Late Arrival — 2 Hours",
+    "earlyDeparture": "Early Departure",
+    "multipleDays": "Absent — Multiple Days",
+    "acknowledged": "Acknowledged",
+    "submitted": "Submitted",
+    "morningShift": "Morning Shift",
+    "swingShift": "Swing Shift",
+    "graveShift": "Grave Shift",
+    "reason": {
+      "flu": "Not feeling well, flu symptoms",
+      "carTrouble": "Car trouble, waiting for tow",
+      "childCare": "Child care emergency",
+      "appointment": "Scheduled appointment"
+    }
+  },
+  "schedule": {
+    "title": "My Schedule",
+    "today": "Today",
+    "shift": "Shift",
+    "department": "Department",
+    "morning": "Morning",
+    "swing": "Swing",
+    "grave": "Grave",
+    "other": "Other",
+    "timeRange": {
+      "morning": "6:00 AM — 2:00 PM"
+    },
+    "dayOff": "Day Off",
+    "hours": "Hours Scheduled",
+    "overtime": "Overtime This Period"
+  },
+  "days": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  },
+  "callin": {
+    "title": "Submit Call-In",
+    "step1": "Absence Type",
+    "step2": "Shift Details",
+    "step3": "Info",
+    "step4": "Review",
+    "step5": "Done",
+    "whatType": "What type of absence?",
+    "selectOption": "Select the option that best describes your situation.",
+    "fullDay": "Full Day",
+    "fullDayDesc": "I won't be coming in today",
+    "lateArrival": "Late Arrival",
+    "lateArrivalDesc": "I'll be in, just running late",
+    "earlyDeparture": "Early Departure",
+    "earlyDepartureDesc": "I need to leave before my shift ends",
+    "multipleDays": "Multiple Days",
+    "multipleDaysDesc": "I'll be out for more than one day",
+    "shiftDetails": "Shift Details",
+    "tellUs": "Tell us about your scheduled shift.",
+    "absenceDate": "Absence Date",
+    "selectDate": "Select date",
+    "yourShift": "Your Shift",
+    "shiftStart": "Shift Start Time",
+    "shiftEnd": "Shift End Time",
+    "info": "Info",
+    "additionalInfo": "Additional Information",
+    "reason": "Reason for absence",
+    "selectReason": "Select a reason",
+    "estimatedArrival": "Estimated Arrival Time",
+    "estimatedDeparture": "Expected Departure Time",
+    "datesRange": "Date Range",
+    "additionalNotes": "Additional Notes",
+    "notesPlaceholder": "Any details for your supervisor...",
+    "review": "Review Your Call-In",
+    "reviewDesc": "Confirm everything looks correct.",
+    "absenceType": "Absence Type",
+    "date": "Date",
+    "shift": "Shift",
+    "reasonLabel": "Reason",
+    "notes": "Additional Notes",
+    "done": {
+      "title": "Call-In Submitted!",
+      "desc": "Your supervisor has been notified. You'll get a text when it's acknowledged.",
+      "confirmation": "Confirmation #",
+      "backToDashboard": "Back to Dashboard",
+      "submitAnother": "Submit Another Call-In"
+    }
+  },
+  "btn": {
+    "continue": "Continue",
+    "back": "Back",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "viewAll": "View All",
+    "signOut": "Sign Out"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "lang": {
+    "en": "English",
+    "es": "Español",
+    "tl": "Tagalog"
+  },
+  "reason": {
+    "illness": "Illness / Not Feeling Well",
+    "family": "Family Emergency",
+    "car": "Car Trouble / Transportation",
+    "appointment": "Medical / Dental Appointment",
+    "personal": "Personal Emergency",
+    "childcare": "Childcare Issue",
+    "bereavement": "Bereavement",
+    "other": "Other"
+  }
+}

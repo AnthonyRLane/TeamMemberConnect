@@ -66,7 +66,9 @@
     "grave": "Grave",
     "other": "Iba",
     "timeRange": {
-      "morning": "6:00 AM — 2:00 PM"
+      "morning": "6:00 AM — 2:00 PM",
+      "swing": "2:00 PM — 10:00 PM",
+      "grave": "10:00 PM — 6:00 AM"
     },
     "dayOff": "Day Off",
     "hours": "Naka-schedule na oras",

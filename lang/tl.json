@@ -12,9 +12,9 @@
   },
   "quickActions": {
     "callIn": "Mag-call in",
-    "callInDesc": "I-submit ang pagliban",
+    "callInDesc": "Mag-report",
     "history": "Kasaysayan",
-    "historyDesc": "Mga dating call-in"
+    "historyDesc": "Mga naunang report"
   },
   "hr": {
     "title": "Mga anunsyo ng HR",

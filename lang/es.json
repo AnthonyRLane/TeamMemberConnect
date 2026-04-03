@@ -11,10 +11,10 @@
     "title": "Crupier — Juegos de Mesa"
   },
   "quickActions": {
-    "callIn": "Reportar ausencia",
-    "callInDesc": "Enviar aviso de ausencia",
+    "callIn": "Reportar",
+    "callInDesc": "Enviar ausencia",
     "history": "Historial",
-    "historyDesc": "Avisos anteriores"
+    "historyDesc": "Reportes previos"
   },
   "hr": {
     "title": "Anuncios de Recursos Humanos",
